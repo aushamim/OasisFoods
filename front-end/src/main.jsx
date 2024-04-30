@@ -7,11 +7,11 @@ register();
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import Layout from "./Components/Layout/Layout.jsx";
-import Home from "./Pages/Home/Home.jsx";
+import Layout from "./Components/Layout/Layout";
+import Home from "./Pages/Home/Home";
 import Login from "./Pages/User/Login";
 import Register from "./Pages/User/Register";
-import GlobalStateProvider from "./Hooks/GlobalStateProvider.jsx";
+import GlobalStateProvider from "./Hooks/GlobalStateProvider";
 
 const router = createBrowserRouter([
   {
