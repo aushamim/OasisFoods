@@ -8,7 +8,7 @@ register();
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import Layout from "./Components/Layout/Layout";
-import Home from "./Pages/Home/Home";
+import HomePage from "./Pages/Home/HomePage";
 import Login from "./Pages/User/Login";
 import Register from "./Pages/User/Register";
 import GlobalStateProvider from "./Hooks/GlobalStateProvider";
@@ -20,7 +20,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Home />,
+        element: <HomePage />,
       },
       {
         path: "/login",
