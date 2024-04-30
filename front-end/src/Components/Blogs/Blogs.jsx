@@ -36,7 +36,7 @@ const Blogs = () => {
           </SwiperSlide>
 
           <SwiperSlide>
-            <div className="flex items-center justify-center h-full">
+            <div className="flex items-center justify-center py-52">
               <a
                 href=""
                 className="font-semibold text-lg hover:text-orange-500 duration-300"
