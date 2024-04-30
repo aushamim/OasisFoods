@@ -15,7 +15,7 @@ const GlobalStateProvider = ({ children }) => {
 
   useEffect(() => {
     setAllProductsLoading(true);
-    fetch("http://127.0.0.1:8000/products/all/")
+    fetch("https://oasisfoods.onrender.com/products/all/")
       .then((res) => res.json())
       .then((data) => {
         setAllProducts(data);
@@ -25,7 +25,7 @@ const GlobalStateProvider = ({ children }) => {
 
   useEffect(() => {
     setFeaturedProductsLoading(true);
-    fetch("http://127.0.0.1:8000/products/featured/")
+    fetch("https://oasisfoods.onrender.com/products/featured/")
       .then((res) => res.json())
       .then((data) => {
         setFeaturedProducts(data);
@@ -35,7 +35,7 @@ const GlobalStateProvider = ({ children }) => {
 
   useEffect(() => {
     setBestSellerProductsLoading(true);
-    fetch("http://127.0.0.1:8000/products/best_seller/")
+    fetch("https://oasisfoods.onrender.com/products/best_seller/")
       .then((res) => res.json())
       .then((data) => {
         setBestSellerProducts(data);

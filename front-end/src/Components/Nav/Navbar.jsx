@@ -8,7 +8,7 @@ const handleLogout = (token) => {
   }
 
   const promise = () => {
-    return fetch("http://127.0.0.1:8000/user/logout/", {
+    return fetch("https://oasisfoods.onrender.com/user/logout/", {
       method: "POST",
       headers: {
         Authorization: `Token ${token}`,

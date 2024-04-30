@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 const Product = ({ category, name, image, price, discount }) => {
   const [categoryDetails, setCategoryDetails] = useState([]);
   useEffect(() => {
-    fetch(`http://127.0.0.1:8000/products/category/${category}/`)
+    fetch(`https://oasisfoods.onrender.com/products/category/${category}/`)
       .then((res) => res.json())
       .then((data) => setCategoryDetails(data));
   }, [category]);

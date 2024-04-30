@@ -18,7 +18,7 @@ const handleSubmit = (e) => {
   }
 
   const promise = () => {
-    return fetch("http://127.0.0.1:8000/user/register/", {
+    return fetch("https://oasisfoods.onrender.com/user/register/", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({

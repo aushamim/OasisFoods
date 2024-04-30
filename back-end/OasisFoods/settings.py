@@ -25,8 +25,12 @@ SECRET_KEY = "django-insecure-(8c83tegung_333wq7qsi2i0pk==@d)&^@^!c0eik3&v7^g%mf
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-CORS_ORIGIN_WHITELIST = ("http://localhost:5173",)
+ALLOWED_HOSTS = ["oasisfoods.onrender.com"]
+CSRF_TRUSTED_ORIGINS = ["https://oasisfoods.onrender.com"]
+CORS_ORIGIN_WHITELIST = (
+    "http://localhost:5173",
+    "https://oasis-foods.netlify.app",
+)
 
 
 # Application definition

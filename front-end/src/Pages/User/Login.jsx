@@ -7,7 +7,7 @@ const handleSubmit = (e) => {
   const password = e.target.elements["password"].value;
 
   const promise = () => {
-    return fetch("http://127.0.0.1:8000/user/login/", {
+    return fetch("https://oasisfoods.onrender.com/user/login/", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({
