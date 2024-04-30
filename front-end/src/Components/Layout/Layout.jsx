@@ -1,20 +1,9 @@
-import "./App.css";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { register } from "swiper/element/bundle";
-register();
-import Nav from "./Components/Nav/nav";
-import Footer from "./Components/Footer/footer";
-import Home from "./Pages/Home/home";
 import { useEffect, useState } from "react";
+import { Outlet } from "react-router-dom";
+import Nav from "../Nav/nav";
+import Footer from "../Footer/footer";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Home />,
-  },
-]);
-
-function App() {
+const Layout = () => {
   const [scrollToTopVisible, setScrollToTopVisible] = useState(false);
   useEffect(() => {
     function handleScroll() {
@@ -34,9 +23,12 @@ function App() {
     <div>
       <div className="w-2/3 mx-auto">
         <Nav></Nav>
+
+        {/* All Pages */}
         <div className="min-h-[85vh]">
-          <RouterProvider router={router} />
+          <Outlet></Outlet>
         </div>
+
         <Footer></Footer>
       </div>
 
@@ -70,6 +62,6 @@ function App() {
       </button>
     </div>
   );
-}
+};
 
-export default App;
+export default Layout;

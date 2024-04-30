@@ -1,40 +1,44 @@
+import { Link } from "react-router-dom";
+
 const nav = () => {
   return (
     <div className="grid grid-cols-5 py-5 mb-5">
       <div className="text-3xl font-bold flex items-center">
-        <span className="text-orange-500">O</span>asisFoods
+        <Link to="/">
+          <span className="text-orange-500">O</span>asisFoods
+        </Link>
       </div>
       <div className="col-span-3 text-center font-semibold flex items-center justify-center">
-        <a
+        <Link
+          to="/"
           className=" text-gray-500 hover:text-orange-500 duration-300"
-          href=""
         >
           Home
-        </a>
+        </Link>
         <a
-          className="ml-5 text-gray-500 hover:text-orange-500 duration-300"
           href=""
+          className="ml-5 text-gray-500 hover:text-orange-500 duration-300"
         >
           Shop
         </a>
         <a
-          className="ml-5 text-gray-500 hover:text-orange-500 duration-300"
           href=""
+          className="ml-5 text-gray-500 hover:text-orange-500 duration-300"
         >
           Blog
         </a>
         <a
-          className="ml-5 text-gray-500 hover:text-orange-500 duration-300"
           href=""
+          className="ml-5 text-gray-500 hover:text-orange-500 duration-300"
         >
           About Us
         </a>
-        <a
+        <Link
+          to="/login"
           className="ml-5 text-gray-500 hover:text-orange-500 duration-300"
-          href=""
         >
           Login
-        </a>
+        </Link>
       </div>
       <div className="flex items-center justify-end">
         <div className="flex items-center gap-3">
