@@ -5,7 +5,7 @@ import Sale from "../../Components/Sale/Sale";
 import Partners from "../../Components/Partners/Partners";
 import Blogs from "../../Components/Blogs/Blogs";
 
-const home = () => {
+const Home = () => {
   return (
     <div>
       <HeroSection></HeroSection>
@@ -62,4 +62,4 @@ const home = () => {
   );
 };
 
-export default home;
+export default Home;

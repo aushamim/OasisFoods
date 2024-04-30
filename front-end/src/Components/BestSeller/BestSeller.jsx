@@ -1,8 +1,11 @@
 import { useState } from "react";
 import Product from "../Product/Product";
+import useGlobalState from "../../Hooks/useGlobalState";
 
 const BestSeller = () => {
+  const { bestSellerProducts, bestSellerProductsLoading } = useGlobalState();
   const [active, setActive] = useState("All");
+
   return (
     <div className="mt-16">
       <div className="grid grid-cols-3 border-b">
@@ -71,35 +74,35 @@ const BestSeller = () => {
         </div>
       </div>
 
-      <div className="p-10 flex items-center justify-center">
-        <span className="loading loading-dots loading-lg"></span>
-      </div>
+      {bestSellerProductsLoading ? (
+        <div className="p-10 flex items-center justify-center">
+          <span className="loading loading-dots loading-lg"></span>
+        </div>
+      ) : (
+        <>
+          <div className="p-10">
+            <img
+              className="w-16 mx-auto"
+              src="/assets/images/food.png"
+              alt="no foods"
+            />
+            <p className="text-center mt-2">No product in this category</p>
+          </div>
 
-      <div className="p-10">
-        <img
-          className="w-16 mx-auto"
-          src="/assets/images/food.png"
-          alt="no foods"
-        />
-        <p className="text-center mt-2">No product in this category</p>
-      </div>
-
-      <div className="mt-10 grid grid-cols-4 gap-7">
-        <Product
-          category={"Fruits"}
-          name={"Black Grapes"}
-          image={"https://ogami-react.vercel.app//assets/images/products/1.png"}
-          price={6.99}
-          discount={0}
-        ></Product>
-        <Product
-          category={"Fruits"}
-          name={"Oranges"}
-          image={"https://ogami-react.vercel.app//assets/images/products/7.png"}
-          price={6.99}
-          discount={20}
-        ></Product>
-      </div>
+          <div className="mt-10 grid grid-cols-4 gap-7">
+            {bestSellerProducts.map((product) => (
+              <Product
+                key={product?.id}
+                category={product?.category}
+                name={product?.name}
+                image={product?.image}
+                price={parseFloat(product?.price)}
+                discount={parseFloat(product?.discount)}
+              ></Product>
+            ))}
+          </div>
+        </>
+      )}
     </div>
   );
 };

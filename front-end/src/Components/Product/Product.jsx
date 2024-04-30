@@ -1,7 +1,28 @@
+import { useEffect, useState } from "react";
+
 /* eslint-disable react/prop-types */
 const Product = ({ category, name, image, price, discount }) => {
+  const [categoryDetails, setCategoryDetails] = useState([]);
+  useEffect(() => {
+    fetch(`http://127.0.0.1:8000/products/category/${category}/`)
+      .then((res) => res.json())
+      .then((data) => setCategoryDetails(data));
+  }, [category]);
+
   return (
     <div className="border border-gray-100 py-8 rounded hover:border-gray-50 hover:shadow-xl transition duration-300 relative">
+      {/* Generate TailSind Colors */}
+      <div className="hidden">
+        <p className="text-slate-500">aa</p>
+        <p className="text-red-500">aa</p>
+        <p className="text-orange-500">aa</p>
+        <p className="text-lime-500">aa</p>
+        <p className="text-green-500">aa</p>
+        <p className="text-blue-500">aa</p>
+        <p className="text-purple-500">aa</p>
+        <p className="text-pink-500">aa</p>
+      </div>
+
       {discount > 0 ? (
         <p className="font-semibold text-xs px-2 py-1 text-lime-700 bg-lime-200 rounded-l-full absolute top-3 right-0">
           {discount}% Off
@@ -10,8 +31,10 @@ const Product = ({ category, name, image, price, discount }) => {
         ""
       )}
       <img className="h-40 mx-auto" src={image} alt="" />
-      <p className="uppercase mt-6 text-sm font-medium text-center text-lime-500">
-        {category}
+      <p
+        className={`uppercase mt-6 text-sm font-medium text-center text-${categoryDetails?.color_category}-500`}
+      >
+        {categoryDetails?.name}
       </p>
       <p className="mt-2 font-semibold text-center text-lg">{name}</p>
       <p className="mt-2 font-semibold text-center">

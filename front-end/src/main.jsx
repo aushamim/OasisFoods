@@ -8,9 +8,10 @@ register();
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import Layout from "./Components/Layout/Layout.jsx";
-import Home from "./Pages/Home/home";
+import Home from "./Pages/Home/Home.jsx";
 import Login from "./Pages/User/Login";
 import Register from "./Pages/User/Register";
+import GlobalStateProvider from "./Hooks/GlobalStateProvider.jsx";
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <GlobalStateProvider>
+      <RouterProvider router={router} />
+    </GlobalStateProvider>
   </React.StrictMode>
 );

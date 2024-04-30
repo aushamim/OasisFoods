@@ -42,7 +42,7 @@ const handleLogout = (token) => {
   });
 };
 
-const nav = () => {
+const Nav = () => {
   const token = localStorage.getItem("token");
   return (
     <div className="grid grid-cols-5 py-5 mb-5">
@@ -149,4 +149,4 @@ const nav = () => {
   );
 };
 
-export default nav;
+export default Nav;

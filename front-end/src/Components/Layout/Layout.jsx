@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
-import Nav from "../Nav/nav";
-import Footer from "../Footer/footer";
+import Nav from "../Nav/Nav";
+import Footer from "../Footer/Footer";
 import { Toaster } from "sonner";
 
 const Layout = () => {
