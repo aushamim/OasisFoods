@@ -78,7 +78,7 @@ const BestSeller = () => {
       <div className="p-10">
         <img
           className="w-16 mx-auto"
-          src="assets/images/food.png"
+          src="/assets/images/food.png"
           alt="no foods"
         />
         <p className="text-center mt-2">No product in this category</p>
@@ -88,14 +88,14 @@ const BestSeller = () => {
         <Product
           category={"Fruits"}
           name={"Black Grapes"}
-          image={"https://ogami-react.vercel.app/assets/images/products/1.png"}
+          image={"https://ogami-react.vercel.app//assets/images/products/1.png"}
           price={6.99}
           discount={0}
         ></Product>
         <Product
           category={"Fruits"}
           name={"Oranges"}
-          image={"https://ogami-react.vercel.app/assets/images/products/7.png"}
+          image={"https://ogami-react.vercel.app//assets/images/products/7.png"}
           price={6.99}
           discount={20}
         ></Product>

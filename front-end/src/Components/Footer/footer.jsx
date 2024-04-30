@@ -109,7 +109,7 @@ const footer = () => {
         <div>
           <img
             className="w-full"
-            src="assets/images/payment.png"
+            src="/assets/images/payment.png"
             alt="payment methods"
           />
         </div>

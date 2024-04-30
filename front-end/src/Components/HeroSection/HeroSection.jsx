@@ -25,7 +25,7 @@ const HeroSection = () => {
           className="mySwiper rounded-lg"
         >
           <SwiperSlide>
-            <div className="pt-24 pb-52 px-20 bg-[url(assets/images/hero-1.png)] bg-no-repeat bg-cover">
+            <div className="pt-24 pb-52 px-20 bg-[url(/assets/images/hero-1.png)] bg-no-repeat bg-cover">
               <p className="font-semibold text-orange-500 uppercase">
                 Fresh Fruit
               </p>
@@ -46,7 +46,7 @@ const HeroSection = () => {
           </SwiperSlide>
 
           <SwiperSlide>
-            <div className="pt-24 pb-52 px-20 bg-[url(assets/images/hero-2.png)] bg-no-repeat bg-cover">
+            <div className="pt-24 pb-52 px-20 bg-[url(/assets/images/hero-2.png)] bg-no-repeat bg-cover">
               <div className="invisible">
                 <p className="font-semibold text-orange-500 uppercase">
                   Fresh Fruit
@@ -69,7 +69,7 @@ const HeroSection = () => {
           </SwiperSlide>
 
           <SwiperSlide>
-            <div className="pt-24 pb-52 px-20 bg-[url(assets/images/hero-3.png)] bg-no-repeat bg-cover">
+            <div className="pt-24 pb-52 px-20 bg-[url(/assets/images/hero-3.png)] bg-no-repeat bg-cover">
               <p className="font-semibold text-orange-500 uppercase">
                 Fresh Fruit
               </p>
@@ -90,7 +90,7 @@ const HeroSection = () => {
           </SwiperSlide>
 
           <SwiperSlide>
-            <div className="pt-24 pb-52 px-20 bg-[url(assets/images/hero-4.png)] bg-no-repeat bg-cover">
+            <div className="pt-24 pb-52 px-20 bg-[url(/assets/images/hero-4.png)] bg-no-repeat bg-cover">
               <div className="invisible">
                 <p className="font-semibold text-orange-500 uppercase">
                   Fresh Fruit
@@ -125,7 +125,7 @@ const HeroSection = () => {
         <div className="border-r border-gray-200">
           <img
             className="w-8 mx-auto"
-            src="assets/images/benifits-1.png"
+            src="/assets/images/benifits-1.png"
             alt="benifits"
           />
           <p className="text-center mt-4 mb-1 font-semibold">FREE SHIPPING</p>
@@ -134,7 +134,7 @@ const HeroSection = () => {
         <div className="border-r border-gray-200">
           <img
             className="w-8 mx-auto"
-            src="assets/images/benifits-2.png"
+            src="/assets/images/benifits-2.png"
             alt="benifits"
           />
           <p className="text-center mt-2 mb-1 font-semibold">
@@ -145,7 +145,7 @@ const HeroSection = () => {
         <div className="border-r border-gray-200">
           <img
             className="w-8 mx-auto"
-            src="assets/images/benifits-3.png"
+            src="/assets/images/benifits-3.png"
             alt="benifits"
           />
           <p className="text-center mt-4 mb-1 font-semibold">SECURE PAYMENT</p>
@@ -154,7 +154,7 @@ const HeroSection = () => {
         <div>
           <img
             className="w-8 mx-auto"
-            src="assets/images/benifits-4.png"
+            src="/assets/images/benifits-4.png"
             alt="benifits"
           />
           <p className="text-center mt-2 mb-1 font-semibold">24/7 SUPPORT</p>
