@@ -17,24 +17,30 @@ const GlobalStateProvider = ({ children }) => {
     setAllProductsLoading(true);
     fetch("http://127.0.0.1:8000/products/all/")
       .then((res) => res.json())
-      .then((data) => setAllProducts(data));
-    setAllProductsLoading(false);
+      .then((data) => {
+        setAllProducts(data);
+        setAllProductsLoading(false);
+      });
   }, []);
 
   useEffect(() => {
     setFeaturedProductsLoading(true);
     fetch("http://127.0.0.1:8000/products/featured/")
       .then((res) => res.json())
-      .then((data) => setFeaturedProducts(data));
-    setFeaturedProductsLoading(false);
+      .then((data) => {
+        setFeaturedProducts(data);
+        setFeaturedProductsLoading(false);
+      });
   }, []);
 
   useEffect(() => {
     setBestSellerProductsLoading(true);
     fetch("http://127.0.0.1:8000/products/best_seller/")
       .then((res) => res.json())
-      .then((data) => setBestSellerProducts(data));
-    setBestSellerProductsLoading(false);
+      .then((data) => {
+        setBestSellerProducts(data);
+        setBestSellerProductsLoading(false);
+      });
   }, []);
 
   return (
