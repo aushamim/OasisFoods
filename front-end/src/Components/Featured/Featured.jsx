@@ -82,14 +82,14 @@ const Featured = () => {
         </div>
       ) : (
         <>
-          <div className="p-10">
+          {/* <div className="p-10">
             <img
               className="w-16 mx-auto"
               src="/assets/images/food.png"
               alt="no foods"
             />
             <p className="text-center mt-2">No product in this category</p>
-          </div>
+          </div> */}
 
           <div className="mt-10 grid grid-cols-4 gap-7">
             {featuredProducts.map((product) => (
