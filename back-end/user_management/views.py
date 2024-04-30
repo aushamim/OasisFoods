@@ -1,7 +1,7 @@
 from rest_framework import viewsets
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, login, logout
 from rest_framework.authtoken.models import Token
 from user_management.models import Profile
 from user_management.serializers import (
@@ -24,11 +24,12 @@ class RegistrationViewset(APIView):
 
         if serializer.is_valid():
             user = serializer.save()
-            return Response("Registered")
+            token, _ = Token.objects.get_or_create(user=user)
+            return Response({"token": token.key, "user_id": user.id})
         return Response(serializer.errors)
 
 
-class UserLogin(APIView):
+class UserLoginView(APIView):
     def post(self, request):
         serializer = LoginSerilizer(data=self.request.data)
         if serializer.is_valid():
@@ -37,8 +38,15 @@ class UserLogin(APIView):
             user = authenticate(username=username, password=password)
             if user:
                 token, _ = Token.objects.get_or_create(user=user)
-
+                login(request, user)
                 return Response({"token": token.key, "user_id": user.id})
             else:
                 return Response({"error": "Invalid Username or Password"})
         return Response(serializer.errors)
+
+
+class UserLogoutView(APIView):
+    def get(self, request):
+        request.user.auth_token.delete()
+        logout(request)
+        return Response("Logged Out")
