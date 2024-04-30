@@ -1,6 +1,49 @@
 import { Link } from "react-router-dom";
+import { toast } from "sonner";
+
+const handleLogout = (token) => {
+  if (!token) {
+    toast.error("User not logged in.");
+    return;
+  }
+
+  const promise = () => {
+    return fetch("http://127.0.0.1:8000/user/logout/", {
+      method: "POST",
+      headers: {
+        Authorization: `Token ${token}`,
+        "content-type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.error) {
+          throw new Error(data.error);
+        } else {
+          localStorage.removeItem("token");
+          localStorage.removeItem("user_id");
+
+          setTimeout(() => {
+            window.location.href = "/";
+          }, 2000);
+        }
+      })
+      .catch((error) => {
+        throw error;
+      });
+  };
+
+  toast.promise(promise, {
+    loading: "Logging out. Please wait.",
+    success: "Logged out successfully",
+    error: (error) => {
+      return error;
+    },
+  });
+};
 
 const nav = () => {
+  const token = localStorage.getItem("token");
   return (
     <div className="grid grid-cols-5 py-5 mb-5">
       <div className="text-3xl font-bold flex items-center">
@@ -33,12 +76,23 @@ const nav = () => {
         >
           About Us
         </a>
-        <Link
-          to="/login"
-          className="ml-5 text-gray-500 hover:text-orange-500 duration-300"
-        >
-          Login
-        </Link>
+        {token ? (
+          <button
+            onClick={() => {
+              handleLogout(token);
+            }}
+            className="ml-5 text-gray-500 hover:text-orange-500 duration-300"
+          >
+            Logout
+          </button>
+        ) : (
+          <Link
+            to="/login"
+            className="ml-5 text-gray-500 hover:text-orange-500 duration-300"
+          >
+            Login
+          </Link>
+        )}
       </div>
       <div className="flex items-center justify-end">
         <div className="flex items-center gap-3">

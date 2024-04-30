@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import Nav from "../Nav/nav";
 import Footer from "../Footer/footer";
+import { Toaster } from "sonner";
 
 const Layout = () => {
   const [scrollToTopVisible, setScrollToTopVisible] = useState(false);
@@ -21,6 +22,7 @@ const Layout = () => {
 
   return (
     <div>
+      <Toaster richColors />
       <div className="w-2/3 mx-auto">
         <Nav></Nav>
 
