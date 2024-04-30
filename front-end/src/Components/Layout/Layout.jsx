@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
-import Nav from "../Nav/Nav";
-import Footer from "../Footer/Footer";
+import Navbar from "../Nav/Navbar";
+import FooterC from "../Footer/FooterC";
 import { Toaster } from "sonner";
 
 const Layout = () => {
@@ -24,14 +24,14 @@ const Layout = () => {
     <div>
       <Toaster richColors />
       <div className="w-2/3 mx-auto">
-        <Nav></Nav>
+        <Navbar></Navbar>
 
         {/* All Pages */}
         <div className="min-h-[85vh]">
           <Outlet></Outlet>
         </div>
 
-        <Footer></Footer>
+        <FooterC></FooterC>
       </div>
 
       <button

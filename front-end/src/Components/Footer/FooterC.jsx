@@ -1,4 +1,4 @@
-const Footer = () => {
+const FooterC = () => {
   return (
     <div className="mt-16">
       <div className="grid grid-cols-5">
@@ -118,4 +118,4 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export default FooterC;
