@@ -2,6 +2,7 @@ import BestSeller from "../../Components/BestSeller/BestSeller";
 import Featured from "../../Components/Featured/Featured";
 import HeroSection from "../../Components/HeroSection/HeroSection";
 import Sale from "../../Components/Sale/Sale";
+import Partners from "../../Components/Partners/Partners";
 
 const home = () => {
   return (
@@ -54,6 +55,7 @@ const home = () => {
         saleEnd={"2024-05-10T00:00:00"}
         image={"https://i.ibb.co/StzdWS5/sale-default.png"}
       ></Sale>
+      <Partners></Partners>
     </div>
   );
 };
