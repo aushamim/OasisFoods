@@ -8,6 +8,7 @@ class Sale(models.Model):
     description = models.CharField(max_length=300)
     discount = models.DecimalField(max_digits=5, decimal_places=2, default=0.00)
     time_until = models.DateField(blank=True, null=True)
+    image = models.ImageField(upload_to="sales/", blank=True, null=True)
 
     def __str__(self):
         return self.name
