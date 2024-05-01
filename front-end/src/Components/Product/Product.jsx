@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
+import useGlobalState from "../../Hooks/useGlobalState";
 
 /* eslint-disable react/prop-types */
 const Product = ({ category, name, image, price, discount }) => {
+  const { APIHost } = useGlobalState();
   const [categoryDetails, setCategoryDetails] = useState([]);
   useEffect(() => {
-    fetch(`https://oasisfoods.onrender.com/products/category/${category}/`)
+    fetch(`${APIHost}/products/category/?id=${category}`)
       .then((res) => res.json())
-      .then((data) => setCategoryDetails(data));
-  }, [category]);
+      .then((data) => setCategoryDetails(data[0]));
+  }, [category, APIHost]);
 
   return (
     <div className="border border-gray-100 py-8 rounded hover:border-gray-50 hover:shadow-xl transition duration-300 relative">

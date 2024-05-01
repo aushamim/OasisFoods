@@ -4,6 +4,9 @@ import PropTypes from "prop-types";
 export const GlobalContext = createContext(null);
 
 const GlobalStateProvider = ({ children }) => {
+  // const APIHost  = "https://oasisfoods.onrender.com"
+  const APIHost = "http://127.0.0.1:8000";
+
   const [allProducts, setAllProducts] = useState([]);
   const [featuredProducts, setFeaturedProducts] = useState([]);
   const [bestSellerProducts, setBestSellerProducts] = useState([]);
@@ -15,7 +18,7 @@ const GlobalStateProvider = ({ children }) => {
 
   useEffect(() => {
     setAllProductsLoading(true);
-    fetch("https://oasisfoods.onrender.com/products/all/")
+    fetch(`${APIHost}/products/all/`)
       .then((res) => res.json())
       .then((data) => {
         setAllProducts(data);
@@ -25,7 +28,7 @@ const GlobalStateProvider = ({ children }) => {
 
   useEffect(() => {
     setFeaturedProductsLoading(true);
-    fetch("https://oasisfoods.onrender.com/products/featured/")
+    fetch(`${APIHost}/products/featured/`)
       .then((res) => res.json())
       .then((data) => {
         setFeaturedProducts(data);
@@ -35,7 +38,7 @@ const GlobalStateProvider = ({ children }) => {
 
   useEffect(() => {
     setBestSellerProductsLoading(true);
-    fetch("https://oasisfoods.onrender.com/products/best_seller/")
+    fetch(`${APIHost}/products/best_seller/`)
       .then((res) => res.json())
       .then((data) => {
         setBestSellerProducts(data);
@@ -46,6 +49,7 @@ const GlobalStateProvider = ({ children }) => {
   return (
     <GlobalContext.Provider
       value={{
+        APIHost,
         allProducts,
         featuredProducts,
         bestSellerProducts,
