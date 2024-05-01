@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
+import useGlobalState from "../../Hooks/useGlobalState";
 
-const handleSubmit = (e) => {
+const handleSubmit = (e, APIHost) => {
   e.preventDefault();
   const username = e.target.elements["username"].value;
   const first_name = e.target.elements["first_name"].value;
@@ -18,7 +19,7 @@ const handleSubmit = (e) => {
   }
 
   const promise = () => {
-    return fetch("https://oasisfoods.onrender.com/user/register/", {
+    return fetch(`${APIHost}/user/register/`, {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({
@@ -62,6 +63,7 @@ const handleSubmit = (e) => {
 };
 
 const Register = () => {
+  const { APIHost } = useGlobalState();
   return (
     <div className="mt-16">
       <h1 className="text-5xl font-bold text-center">Register</h1>
@@ -70,7 +72,7 @@ const Register = () => {
       <form
         className="mt-16 w-1/2 mx-auto"
         onSubmit={(e) => {
-          handleSubmit(e);
+          handleSubmit(e, APIHost);
         }}
       >
         <label className="input input-bordered flex items-center gap-2 mt-5">

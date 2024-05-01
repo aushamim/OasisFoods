@@ -2,7 +2,7 @@ from rest_framework import viewsets
 from rest_framework.response import Response
 
 from blogs.models import Blog, Comment
-from blogs.serializers import BlogSerializer, CommentSerializer
+from blogs.serializers import BlogSerializer, CommentSerializer, CreateCommentSerializer
 
 
 # Create your views here.
@@ -20,7 +20,6 @@ class BlogDetailsViewSet(viewsets.ModelViewSet):
         if id:
             queryset = self.queryset.filter(id=id)
             serializer = self.serializer_class(queryset, many=True)
-            print(serializer)
             return Response(serializer.data)
         else:
             return Response(
@@ -48,3 +47,13 @@ class CommentViewSet(viewsets.ModelViewSet):
                 },
                 status=400,
             )
+
+
+class CommentCreateViewset(viewsets.ViewSet):
+    def create(self, request):
+        serializer = CreateCommentSerializer(data=request.data)
+        if serializer.is_valid():
+            comment = serializer.save()
+            comment.blog.comments.add(comment)
+            return Response(serializer.data)
+        return Response(serializer.errors)

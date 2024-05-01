@@ -1,14 +1,15 @@
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
+import useGlobalState from "../../Hooks/useGlobalState";
 
-const handleLogout = (token) => {
+const handleLogout = (token, APIHost) => {
   if (!token) {
     toast.error("User not logged in.");
     return;
   }
 
   const promise = () => {
-    return fetch("https://oasisfoods.onrender.com/user/logout/", {
+    return fetch(`${APIHost}/user/logout/`, {
       method: "POST",
       headers: {
         Authorization: `Token ${token}`,
@@ -44,6 +45,7 @@ const handleLogout = (token) => {
 
 const Navbar = () => {
   const token = localStorage.getItem("token");
+  const { APIHost } = useGlobalState();
   return (
     <div className="grid grid-cols-5 py-5 mb-5">
       <div className="text-3xl font-bold flex items-center">
@@ -79,7 +81,7 @@ const Navbar = () => {
         {token ? (
           <button
             onClick={() => {
-              handleLogout(token);
+              handleLogout(token, APIHost);
             }}
             className="ml-5 text-gray-500 hover:text-orange-500 duration-300"
           >

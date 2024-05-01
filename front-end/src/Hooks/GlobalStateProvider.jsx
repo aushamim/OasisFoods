@@ -7,6 +7,7 @@ const GlobalStateProvider = ({ children }) => {
   const APIHost = "https://oasisfoods.onrender.com";
   // const APIHost = "http://127.0.0.1:8000";
 
+  const [user, setUser] = useState(localStorage.getItem("user_id") || null);
   const [allProducts, setAllProducts] = useState([]);
   const [featuredProducts, setFeaturedProducts] = useState([]);
   const [bestSellerProducts, setBestSellerProducts] = useState([]);
@@ -17,6 +18,12 @@ const GlobalStateProvider = ({ children }) => {
   const [bestSellerProductsLoading, setBestSellerProductsLoading] =
     useState(true);
   const [blogsLoading, setBlogsLoading] = useState(true);
+
+  const [refreshTrigger, setRefreshTrigger] = useState(false);
+
+  const refresh = () => {
+    setRefreshTrigger(refreshTrigger ? false : true);
+  };
 
   useEffect(() => {
     setAllProductsLoading(true);
@@ -59,12 +66,16 @@ const GlobalStateProvider = ({ children }) => {
         setBlogs(data);
         setBlogsLoading(false);
       });
-  }, []);
+  }, [refreshTrigger]);
 
   return (
     <GlobalContext.Provider
       value={{
         APIHost,
+        user,
+        setUser,
+        refreshTrigger,
+        refresh,
         allProducts,
         featuredProducts,
         bestSellerProducts,

@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
+import useGlobalState from "../../Hooks/useGlobalState";
 
-const handleSubmit = (e) => {
+const handleSubmit = (e, APIHost) => {
   e.preventDefault();
   const username = e.target.elements["username"].value;
   const password = e.target.elements["password"].value;
 
   const promise = () => {
-    return fetch("https://oasisfoods.onrender.com/user/login/", {
+    return fetch(`${APIHost}/user/login/`, {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({
@@ -45,6 +46,7 @@ const handleSubmit = (e) => {
 };
 
 const Login = () => {
+  const { APIHost } = useGlobalState();
   return (
     <div className="mt-16">
       <h1 className="text-5xl font-bold text-center">Login</h1>
@@ -53,7 +55,7 @@ const Login = () => {
       <form
         className="mt-16 w-1/2 mx-auto"
         onSubmit={(e) => {
-          handleSubmit(e);
+          handleSubmit(e, APIHost);
         }}
       >
         <label className="input input-bordered flex items-center gap-2">

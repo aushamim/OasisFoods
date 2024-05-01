@@ -1,9 +1,15 @@
 /* eslint-disable react/prop-types */
 const formatDate = (datetime) => {
   const date = new Date(datetime);
-  const options = { year: "numeric", month: "short", day: "2-digit" };
-  const formattedDate = date.toLocaleDateString("en-US", options);
-  return formattedDate;
+  const options = {
+    year: "numeric",
+    month: "short",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+  };
+  const formattedDateTime = date.toLocaleDateString("en-US", options);
+  return formattedDateTime;
 };
 
 const BlogComment = ({ comment }) => {

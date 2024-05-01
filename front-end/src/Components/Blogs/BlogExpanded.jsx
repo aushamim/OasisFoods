@@ -19,11 +19,15 @@ const BlogExpanded = ({ blog }) => {
   return (
     <div className="mb-16">
       <div className="h-80 rounded-lg overflow-hidden">
-        <img
-          className="w-full h-full object-cover"
-          src={blog?.image ? blog.image : APIHost + "/media/blogs/default.jpg"}
-          alt={blog?.title}
-        />
+        <Link to={`/blog/details/${blog?.id}`}>
+          <img
+            className="w-full h-full object-cover"
+            src={
+              blog?.image ? blog.image : APIHost + "/media/blogs/default.jpg"
+            }
+            alt={blog?.title}
+          />
+        </Link>
       </div>
       <div className="p-2 mb-3">
         <p className="text-sm text-gray-400">

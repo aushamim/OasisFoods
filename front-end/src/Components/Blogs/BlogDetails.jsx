@@ -8,8 +8,50 @@ const handleLike = () => {
   toast.info("Coming Soon");
 };
 
+const handleSubmit = (e, user, blog, APIHost, refresh) => {
+  e.preventDefault();
+  const comment = e.target.elements["comment"].value;
+  e.target.elements["comment"].value = "";
+
+  const data = {
+    blog: blog,
+    user: parseInt(user),
+    body: comment,
+  };
+
+  console.log(JSON.stringify(data));
+
+  const promise = () => {
+    return fetch(`${APIHost}/blogs/create-comment/`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.error) {
+          throw new Error(data.error);
+        } else {
+          refresh();
+          return data;
+        }
+      })
+      .catch((error) => {
+        throw error;
+      });
+  };
+
+  toast.promise(promise, {
+    loading: "Commenting. Please wait.",
+    success: "Commented successfully",
+    error: (error) => {
+      return error;
+    },
+  });
+};
+
 const BlogDetails = ({ id }) => {
-  const { APIHost } = useGlobalState();
+  const { APIHost, user, refreshTrigger, refresh } = useGlobalState();
   const [blog, setBlog] = useState({});
   const [comments, setComments] = useState([]);
 
@@ -17,13 +59,18 @@ const BlogDetails = ({ id }) => {
     fetch(`${APIHost}/blogs/details/?id=${id}`)
       .then((res) => res.json())
       .then((data) => setBlog(data[0]));
-  }, [id, APIHost]);
+  }, [id, APIHost, refreshTrigger]);
 
   useEffect(() => {
     fetch(`${APIHost}/blogs/comments/?blog_id=${id}`)
       .then((res) => res.json())
-      .then((data) => setComments(data));
-  }, [id, APIHost]);
+      .then((data) => {
+        data.sort((a, b) => {
+          return new Date(b.timestamp) - new Date(a.timestamp);
+        });
+        setComments(data);
+      });
+  }, [id, APIHost, refreshTrigger]);
 
   return (
     <div>
@@ -75,7 +122,26 @@ const BlogDetails = ({ id }) => {
       </div>
 
       <div>
-        <h1 className="text-2xl font-medium text-gray-500">
+        <form
+          onSubmit={(e) => {
+            handleSubmit(e, user, blog?.id, APIHost, refresh);
+          }}
+        >
+          <textarea
+            id="comment"
+            className="textarea textarea-bordered w-full"
+            rows={3}
+            placeholder="Write a comment"
+          ></textarea>
+          <div className="flex justify-end mt-2">
+            <input
+              type="submit"
+              value="comment"
+              className="uppercase btn btn-sm"
+            />
+          </div>
+        </form>
+        <h1 className="text-2xl font-medium text-gray-500 mt-10">
           {blog?.comments?.length} Comments
         </h1>
         {comments?.map((comment) => (

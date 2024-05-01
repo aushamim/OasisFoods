@@ -14,7 +14,7 @@ const BlogDetailsPage = () => {
   }, []);
 
   return (
-    <div className="mt-16 mb-28 grid grid-cols-4 gap-8">
+    <div className="my-16 mb-28 grid grid-cols-4 gap-8">
       <div>
         <RecentBlogs></RecentBlogs>
       </div>
