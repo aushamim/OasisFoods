@@ -11,6 +11,26 @@ class AllBlogViewset(viewsets.ModelViewSet):
     serializer_class = BlogSerializer
 
 
+class BlogDetailsViewSet(viewsets.ModelViewSet):
+    queryset = Blog.objects.all()
+    serializer_class = BlogSerializer
+
+    def list(self, request):
+        id = request.query_params.get("id")
+        if id:
+            queryset = self.queryset.filter(id=id)
+            serializer = self.serializer_class(queryset, many=True)
+            print(serializer)
+            return Response(serializer.data)
+        else:
+            return Response(
+                {
+                    "message": "Please provide a blog id parameter in the request. Link example 'blogs/details/?id=<id>'"
+                },
+                status=400,
+            )
+
+
 class CommentViewSet(viewsets.ModelViewSet):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
