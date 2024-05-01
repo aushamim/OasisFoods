@@ -13,12 +13,18 @@ import Login from "./Pages/User/Login";
 import Register from "./Pages/User/Register";
 import GlobalStateProvider from "./Hooks/GlobalStateProvider";
 import BlogPage from "./Pages/Blog/BlogPage";
+import FourOFour from "./Components/FourOFour/FourOFour";
+import BlogDetailsPage from "./Pages/Blog/BlogDetailsPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
     children: [
+      {
+        path: "*",
+        element: <FourOFour />,
+      },
       {
         path: "/",
         element: <HomePage />,
@@ -34,6 +40,10 @@ const router = createBrowserRouter([
       {
         path: "/blog",
         element: <BlogPage />,
+      },
+      {
+        path: "/blog/details/:id",
+        element: <BlogDetailsPage />,
       },
     ],
   },

@@ -6,9 +6,11 @@ import { Autoplay } from "swiper/modules";
 import Blog from "./Blog";
 import useGlobalState from "../../Hooks/useGlobalState";
 import { useEffect, useState } from "react";
+import Loader from "../Loader/Loader";
+import { Link } from "react-router-dom";
 
 const Blogs = () => {
-  const { blogs } = useGlobalState();
+  const { blogs, blogsLoading } = useGlobalState();
 
   const [filteredBlogs, setFilteredBlogs] = useState([]);
   useEffect(() => {
@@ -26,35 +28,39 @@ const Blogs = () => {
         <span className="w-20 h-1 bg-orange-300 block mx-auto mt-2"></span>
       </div>
 
-      <div>
-        <Swiper
-          autoplay={{
-            delay: 10000,
-            disableOnInteraction: false,
-          }}
-          modules={[Autoplay]}
-          slidesPerView={3}
-          spaceBetween={35}
-          className="mySwiper rounded-lg mt-10 grid grid-cols-3 gap-5"
-        >
-          {filteredBlogs?.map((blog) => (
-            <SwiperSlide key={blog.id}>
-              <Blog id={blog.id}></Blog>
-            </SwiperSlide>
-          ))}
+      {blogsLoading ? (
+        <Loader />
+      ) : (
+        <div>
+          <Swiper
+            autoplay={{
+              delay: 10000,
+              disableOnInteraction: false,
+            }}
+            modules={[Autoplay]}
+            slidesPerView={3}
+            spaceBetween={35}
+            className="mySwiper rounded-lg mt-10 grid grid-cols-3 gap-5"
+          >
+            {filteredBlogs?.map((blog) => (
+              <SwiperSlide key={blog.id}>
+                <Blog id={blog.id}></Blog>
+              </SwiperSlide>
+            ))}
 
-          <SwiperSlide>
-            <div className="flex items-center justify-center py-52">
-              <a
-                href=""
-                className="font-semibold text-lg hover:text-orange-500 duration-300"
-              >
-                See More ...
-              </a>
-            </div>
-          </SwiperSlide>
-        </Swiper>
-      </div>
+            <SwiperSlide>
+              <div className="flex items-center justify-center py-52">
+                <Link
+                  to="/blog"
+                  className="font-semibold text-lg hover:text-orange-500 duration-300"
+                >
+                  See More ...
+                </Link>
+              </div>
+            </SwiperSlide>
+          </Swiper>
+        </div>
+      )}
     </div>
   );
 };

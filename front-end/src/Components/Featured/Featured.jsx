@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Product from "../Product/Product";
 import useGlobalState from "../../Hooks/useGlobalState";
+import Loader from "../Loader/Loader";
 
 const Featured = () => {
   const { featuredProducts, featuredProductsLoading } = useGlobalState();
@@ -77,9 +78,7 @@ const Featured = () => {
       </div>
 
       {featuredProductsLoading ? (
-        <div className="p-10 flex items-center justify-center">
-          <span className="loading loading-dots loading-lg"></span>
-        </div>
+        <Loader />
       ) : (
         <>
           {/* <div className="p-10">

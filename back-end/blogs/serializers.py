@@ -10,6 +10,8 @@ class BlogSerializer(serializers.ModelSerializer):
 
 
 class CommentSerializer(serializers.ModelSerializer):
+    user = serializers.StringRelatedField(many=False)
+
     class Meta:
         model = Comment
         fields = "__all__"
