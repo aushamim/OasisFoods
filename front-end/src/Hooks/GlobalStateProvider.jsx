@@ -4,17 +4,19 @@ import PropTypes from "prop-types";
 export const GlobalContext = createContext(null);
 
 const GlobalStateProvider = ({ children }) => {
-  // const APIHost  = "https://oasisfoods.onrender.com"
-  const APIHost = "http://127.0.0.1:8000";
+  const APIHost = "https://oasisfoods.onrender.com";
+  // const APIHost = "http://127.0.0.1:8000";
 
   const [allProducts, setAllProducts] = useState([]);
   const [featuredProducts, setFeaturedProducts] = useState([]);
   const [bestSellerProducts, setBestSellerProducts] = useState([]);
+  const [blogs, setBlogs] = useState([]);
 
   const [allProductsLoading, setAllProductsLoading] = useState(true);
   const [featuredProductsLoading, setFeaturedProductsLoading] = useState(true);
   const [bestSellerProductsLoading, setBestSellerProductsLoading] =
     useState(true);
+  const [blogsLoading, setBlogsLoading] = useState(true);
 
   useEffect(() => {
     setAllProductsLoading(true);
@@ -46,6 +48,19 @@ const GlobalStateProvider = ({ children }) => {
       });
   }, []);
 
+  useEffect(() => {
+    setBlogsLoading(true);
+    fetch(`${APIHost}/blogs/all/`)
+      .then((res) => res.json())
+      .then((data) => {
+        data.sort((a, b) => {
+          return new Date(b.timestamp) - new Date(a.timestamp);
+        });
+        setBlogs(data);
+        setBlogsLoading(false);
+      });
+  }, []);
+
   return (
     <GlobalContext.Provider
       value={{
@@ -53,9 +68,11 @@ const GlobalStateProvider = ({ children }) => {
         allProducts,
         featuredProducts,
         bestSellerProducts,
+        blogs,
         allProductsLoading,
         featuredProductsLoading,
         bestSellerProductsLoading,
+        blogsLoading,
       }}
     >
       {children}

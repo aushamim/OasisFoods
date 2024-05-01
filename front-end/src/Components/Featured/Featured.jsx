@@ -92,7 +92,7 @@ const Featured = () => {
           </div> */}
 
           <div className="mt-10 grid grid-cols-4 gap-7">
-            {featuredProducts.map((product) => (
+            {featuredProducts?.map((product) => (
               <Product
                 key={product?.id}
                 category={product?.category}

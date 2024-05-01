@@ -4,8 +4,21 @@ import "swiper/css";
 import { Autoplay } from "swiper/modules";
 
 import Blog from "./Blog";
+import useGlobalState from "../../Hooks/useGlobalState";
+import { useEffect, useState } from "react";
 
 const Blogs = () => {
+  const { blogs } = useGlobalState();
+
+  const [filteredBlogs, setFilteredBlogs] = useState([]);
+  useEffect(() => {
+    if (blogs.length < 4) {
+      setFilteredBlogs(blogs);
+    } else {
+      setFilteredBlogs(blogs.slice(0, 3));
+    }
+  }, [blogs]);
+
   return (
     <div className="mt-16">
       <div>
@@ -24,16 +37,11 @@ const Blogs = () => {
           spaceBetween={35}
           className="mySwiper rounded-lg mt-10 grid grid-cols-3 gap-5"
         >
-          <SwiperSlide>
-            <Blog></Blog>
-          </SwiperSlide>
-
-          <SwiperSlide>
-            <Blog></Blog>
-          </SwiperSlide>
-          <SwiperSlide>
-            <Blog></Blog>
-          </SwiperSlide>
+          {filteredBlogs?.map((blog) => (
+            <SwiperSlide key={blog.id}>
+              <Blog id={blog.id}></Blog>
+            </SwiperSlide>
+          ))}
 
           <SwiperSlide>
             <div className="flex items-center justify-center py-52">

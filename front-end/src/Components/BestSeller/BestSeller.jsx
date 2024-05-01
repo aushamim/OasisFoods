@@ -90,7 +90,7 @@ const BestSeller = () => {
           </div> */}
 
           <div className="mt-10 grid grid-cols-4 gap-7">
-            {bestSellerProducts.map((product) => (
+            {bestSellerProducts?.map((product) => (
               <Product
                 key={product?.id}
                 category={product?.category}

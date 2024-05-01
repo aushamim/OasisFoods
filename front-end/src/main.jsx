@@ -12,6 +12,7 @@ import HomePage from "./Pages/Home/HomePage";
 import Login from "./Pages/User/Login";
 import Register from "./Pages/User/Register";
 import GlobalStateProvider from "./Hooks/GlobalStateProvider";
+import BlogPage from "./Pages/Blog/BlogPage";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register />,
+      },
+      {
+        path: "/blog",
+        element: <BlogPage />,
       },
     ],
   },

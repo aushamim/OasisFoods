@@ -64,12 +64,12 @@ const Navbar = () => {
         >
           Shop
         </a>
-        <a
-          href=""
+        <Link
+          to="/blog"
           className="ml-5 text-gray-500 hover:text-orange-500 duration-300"
         >
           Blog
-        </a>
+        </Link>
         <a
           href=""
           className="ml-5 text-gray-500 hover:text-orange-500 duration-300"
