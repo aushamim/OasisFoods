@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import useGlobalState from "../../Hooks/useGlobalState";
 import { toast } from "sonner";
 import BlogComment from "./BlogComment";
+import { Link } from "react-router-dom";
 
 const handleLike = () => {
   toast.info("Coming Soon");
@@ -122,25 +123,38 @@ const BlogDetails = ({ id }) => {
       </div>
 
       <div>
-        <form
-          onSubmit={(e) => {
-            handleSubmit(e, user, blog?.id, APIHost, refresh);
-          }}
-        >
-          <textarea
-            id="comment"
-            className="textarea textarea-bordered w-full"
-            rows={3}
-            placeholder="Write a comment"
-          ></textarea>
-          <div className="flex justify-end mt-2">
-            <input
-              type="submit"
-              value="comment"
-              className="uppercase btn btn-sm"
-            />
-          </div>
-        </form>
+        {user ? (
+          <form
+            onSubmit={(e) => {
+              handleSubmit(e, user, blog?.id, APIHost, refresh);
+            }}
+          >
+            <textarea
+              id="comment"
+              className="textarea textarea-bordered w-full"
+              rows={3}
+              placeholder="Write a comment"
+            ></textarea>
+            <div className="flex justify-end mt-2">
+              <input
+                type="submit"
+                value="comment"
+                className="uppercase btn btn-sm"
+              />
+            </div>
+          </form>
+        ) : (
+          <h3 className="text-2xl font-medium text-center">
+            Please{" "}
+            <Link
+              className="text-lime-500 hover:text-lime-600 duration-300"
+              to="/login"
+            >
+              login
+            </Link>{" "}
+            to comment.
+          </h3>
+        )}
         <h1 className="text-2xl font-medium text-gray-500 mt-10">
           {blog?.comments?.length} Comments
         </h1>
