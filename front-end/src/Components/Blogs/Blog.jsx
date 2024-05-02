@@ -19,8 +19,6 @@ const Blog = ({ id }) => {
       .then((data) => setBlog(data[0]));
   }, [id, APIHost]);
 
-  console.log(blog);
-
   return (
     <div
       className="relative h-[450px] bg-no-repeat bg-cover bg-center rounded-lg"

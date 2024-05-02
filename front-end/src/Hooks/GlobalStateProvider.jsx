@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import { toast } from "sonner";
 
 export const GlobalContext = createContext(null);
 
@@ -18,11 +19,18 @@ const GlobalStateProvider = ({ children }) => {
   const [bestSellerProductsLoading, setBestSellerProductsLoading] =
     useState(true);
   const [blogsLoading, setBlogsLoading] = useState(true);
+  const [productQuickView, setProductQuickView] = useState({});
 
   const [refreshTrigger, setRefreshTrigger] = useState(false);
-
   const refresh = () => {
     setRefreshTrigger(refreshTrigger ? false : true);
+  };
+
+  const addToCart = (product) => {
+    toast.info(`Coming Soon! Product ID: ${product?.id}`);
+  };
+  const addToWishlist = (product) => {
+    toast.info(`Coming Soon! Product ID: ${product?.id}`);
   };
 
   useEffect(() => {
@@ -84,6 +92,10 @@ const GlobalStateProvider = ({ children }) => {
         featuredProductsLoading,
         bestSellerProductsLoading,
         blogsLoading,
+        productQuickView,
+        setProductQuickView,
+        addToCart,
+        addToWishlist,
       }}
     >
       {children}

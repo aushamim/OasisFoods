@@ -2,18 +2,19 @@ import { useEffect, useState } from "react";
 import useGlobalState from "../../Hooks/useGlobalState";
 
 /* eslint-disable react/prop-types */
-const Product = ({ category, name, image, price, discount }) => {
-  const { APIHost } = useGlobalState();
+const Product = ({ product }) => {
+  const { APIHost, setProductQuickView, addToCart, addToWishlist } =
+    useGlobalState();
   const [categoryDetails, setCategoryDetails] = useState([]);
   useEffect(() => {
-    fetch(`${APIHost}/products/category/?id=${category}`)
+    fetch(`${APIHost}/products/category/?id=${product?.category}`)
       .then((res) => res.json())
       .then((data) => setCategoryDetails(data[0]));
-  }, [category, APIHost]);
+  }, [product?.category, APIHost]);
 
   return (
     <div className="border border-gray-100 py-8 rounded hover:border-gray-50 hover:shadow-xl transition duration-300 relative">
-      {/* Generate TailSind Colors */}
+      {/* Generate TailWind Colors */}
       <div className="hidden">
         <p className="text-slate-500">aa</p>
         <p className="text-red-500">aa</p>
@@ -25,27 +26,31 @@ const Product = ({ category, name, image, price, discount }) => {
         <p className="text-pink-500">aa</p>
       </div>
 
-      {discount > 0 ? (
+      {parseFloat(product?.discount) > 0 ? (
         <p className="font-semibold text-xs px-2 py-1 text-lime-700 bg-lime-200 rounded-l-full absolute top-3 right-0">
-          {discount}% Off
+          {parseFloat(product?.discount)}% Off
         </p>
       ) : (
         ""
       )}
-      <img className="h-40 mx-auto" src={image} alt="" />
+      <img className="h-40 mx-auto" src={product?.image} alt="" />
       <p
         className={`uppercase mt-6 text-sm font-medium text-center text-${categoryDetails?.color_category}-500`}
       >
         {categoryDetails?.name}
       </p>
-      <p className="mt-2 font-semibold text-center text-lg">{name}</p>
+      <p className="mt-2 font-semibold text-center text-lg">{product?.name}</p>
       <p className="mt-2 font-semibold text-center">
-        ${(price - (price * discount) / 100).toFixed(2)}
-        {discount > 0 ? (
+        $
+        {(
+          parseFloat(product?.price) -
+          (parseFloat(product?.price) * parseFloat(product?.discount)) / 100
+        ).toFixed(2)}
+        {parseFloat(product?.discount) > 0 ? (
           <>
             {" "}
             <span className="text-sm line-through text-gray-300">
-              ${price.toFixed(2)}
+              ${parseFloat(product?.price).toFixed(2)}
             </span>
           </>
         ) : (
@@ -55,7 +60,12 @@ const Product = ({ category, name, image, price, discount }) => {
 
       <div className="mt-8 flex items-center justify-center">
         <div className="tooltip" data-tip="Add to Wishlist">
-          <button className="bg-slate-200 hover:bg-slate-300 p-2 rounded-full">
+          <button
+            onClick={() => {
+              addToWishlist(product);
+            }}
+            className="bg-slate-200 hover:bg-slate-300 p-2 rounded-full"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -73,7 +83,12 @@ const Product = ({ category, name, image, price, discount }) => {
           </button>
         </div>
         <div className="tooltip ml-4" data-tip="Add to Cart">
-          <button className="bg-slate-200 hover:bg-slate-300 p-2 rounded-full">
+          <button
+            className="bg-slate-200 hover:bg-slate-300 p-2 rounded-full"
+            onClick={() => {
+              addToCart(product);
+            }}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -91,7 +106,17 @@ const Product = ({ category, name, image, price, discount }) => {
           </button>
         </div>
         <div className="tooltip ml-4" data-tip="Quick View">
-          <button className="bg-slate-200 hover:bg-slate-300 p-2 rounded-full">
+          <button
+            className="bg-slate-200 hover:bg-slate-300 p-2 rounded-full"
+            onClick={() => {
+              setProductQuickView({
+                ...product,
+                category_name: categoryDetails?.name,
+                category_color: categoryDetails?.color_category,
+              });
+              document.getElementById("product-quick-view").showModal();
+            }}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
