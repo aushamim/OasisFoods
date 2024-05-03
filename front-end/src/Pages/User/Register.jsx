@@ -1,8 +1,8 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import useGlobalState from "../../Hooks/useGlobalState";
 
-const handleSubmit = (e, APIHost) => {
+const handleSubmit = (e, APIHost, navigate, setUser) => {
   e.preventDefault();
   const username = e.target.elements["username"].value;
   const first_name = e.target.elements["first_name"].value;
@@ -42,10 +42,8 @@ const handleSubmit = (e, APIHost) => {
         } else {
           localStorage.setItem("token", data.token);
           localStorage.setItem("user_id", data.user_id);
-
-          setTimeout(() => {
-            window.location.href = "/";
-          }, 2000);
+          setUser(localStorage.getItem("user_id") || null);
+          navigate(-1);
         }
       })
       .catch((error) => {
@@ -63,7 +61,8 @@ const handleSubmit = (e, APIHost) => {
 };
 
 const Register = () => {
-  const { APIHost } = useGlobalState();
+  const { APIHost, setUser } = useGlobalState();
+  const navigate = useNavigate();
   return (
     <div className="mt-16">
       <h1 className="text-5xl font-bold text-center">Register</h1>
@@ -72,7 +71,7 @@ const Register = () => {
       <form
         className="mt-16 w-1/2 mx-auto"
         onSubmit={(e) => {
-          handleSubmit(e, APIHost);
+          handleSubmit(e, APIHost, navigate, setUser);
         }}
       >
         <label className="input input-bordered flex items-center gap-2 mt-5">

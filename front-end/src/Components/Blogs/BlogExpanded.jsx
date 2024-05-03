@@ -4,13 +4,21 @@ import useGlobalState from "../../Hooks/useGlobalState";
 
 const formatDate = (datetime) => {
   const date = new Date(datetime);
-  const options = { year: "numeric", month: "short", day: "2-digit" };
-  const formattedDate = date.toLocaleDateString("en-US", options);
-  return formattedDate;
+  const options = {
+    year: "numeric",
+    month: "short",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+  };
+  const formattedDateTime = date.toLocaleDateString("en-US", options);
+  return formattedDateTime;
 };
 
 const shortenString = (str) => {
-  return str.slice(0, 330).split(" ").slice(0, -1).join(" ") + " ...";
+  return str.length < 120
+    ? str
+    : str.slice(0, 330).split(" ").slice(0, -1).join(" ") + " ...";
 };
 
 const BlogExpanded = ({ blog }) => {

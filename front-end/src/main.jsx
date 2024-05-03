@@ -15,6 +15,7 @@ import GlobalStateProvider from "./Hooks/GlobalStateProvider";
 import BlogPage from "./Pages/Blog/BlogPage";
 import FourOFour from "./Components/FourOFour/FourOFour";
 import BlogDetailsPage from "./Pages/Blog/BlogDetailsPage";
+import NewBlog from "./Pages/Blog/NewBlog";
 
 const router = createBrowserRouter([
   {
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
       {
         path: "/blog/details/:id",
         element: <BlogDetailsPage />,
+      },
+      {
+        path: "/blog/create",
+        element: <NewBlog />,
       },
     ],
   },

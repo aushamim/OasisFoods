@@ -20,8 +20,6 @@ const handleSubmit = (e, user, blog, APIHost, refresh) => {
     body: comment,
   };
 
-  console.log(JSON.stringify(data));
-
   const promise = () => {
     return fetch(`${APIHost}/blogs/create-comment/`, {
       method: "POST",

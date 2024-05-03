@@ -5,13 +5,19 @@ import { Link } from "react-router-dom";
 
 const formatDate = (datetime) => {
   const date = new Date(datetime);
-  const options = { year: "numeric", month: "short", day: "2-digit" };
-  const formattedDate = date.toLocaleDateString("en-US", options);
-  return formattedDate;
+  const options = {
+    year: "numeric",
+    month: "short",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+  };
+  const formattedDateTime = date.toLocaleDateString("en-US", options);
+  return formattedDateTime;
 };
 
 const RecentBlogs = () => {
-  const { APIHost, blogs, blogsLoading } = useGlobalState();
+  const { APIHost, blogs, blogsLoading, user } = useGlobalState();
 
   const [filteredBlogs, setFilteredBlogs] = useState([]);
   useEffect(() => {
@@ -24,6 +30,18 @@ const RecentBlogs = () => {
 
   return (
     <div>
+      {user ? (
+        <div className="border-b pb-5 mb-5">
+          <Link
+            to="/blog/create"
+            className="btn uppercase w-full bg-lime-400 bg-opacity-50 hover:bg-lime-400 hover:bg-opacity-75 duration-300 text-lime-800"
+          >
+            Create a new blog
+          </Link>
+        </div>
+      ) : (
+        ""
+      )}
       <div className="border-b">
         <h1 className="text-3xl font-bold">Recent blogs</h1>
         <span className="w-[4.2rem] h-1 bg-lime-500 block mt-2"></span>
@@ -58,7 +76,7 @@ const RecentBlogs = () => {
                   >
                     {blog?.title}
                   </Link>
-                  <p className="font-medium text-gray-500">
+                  <p className="font-medium text-gray-500 text-sm">
                     {formatDate(blog?.timestamp)}
                   </p>
                 </div>
