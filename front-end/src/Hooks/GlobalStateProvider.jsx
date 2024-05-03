@@ -5,11 +5,12 @@ import { toast } from "sonner";
 export const GlobalContext = createContext(null);
 
 const GlobalStateProvider = ({ children }) => {
-  const APIHost = "https://oasisfoods.onrender.com";
-  // const APIHost = "http://127.0.0.1:8000";
+  // const APIHost = "https://oasisfoods.onrender.com";
+  const APIHost = "http://127.0.0.1:8000";
 
   const [user, setUser] = useState(localStorage.getItem("user_id") || null);
   const [allProducts, setAllProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [featuredProducts, setFeaturedProducts] = useState([]);
   const [bestSellerProducts, setBestSellerProducts] = useState([]);
   const [blogs, setBlogs] = useState([]);
@@ -41,6 +42,12 @@ const GlobalStateProvider = ({ children }) => {
         setAllProducts(data);
         setAllProductsLoading(false);
       });
+  }, []);
+
+  useEffect(() => {
+    fetch(`${APIHost}/products/all-categories/`)
+      .then((res) => res.json())
+      .then((data) => setCategories(data));
   }, []);
 
   useEffect(() => {
@@ -85,6 +92,7 @@ const GlobalStateProvider = ({ children }) => {
         refreshTrigger,
         refresh,
         allProducts,
+        categories,
         featuredProducts,
         bestSellerProducts,
         blogs,

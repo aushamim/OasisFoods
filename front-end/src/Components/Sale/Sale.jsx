@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const Sale = ({ saleName, saleEnd, image }) => {
   const [timeRemaining, setTimeRemaining] = useState(calculateTimeRemaining());
@@ -91,12 +92,12 @@ const Sale = ({ saleName, saleEnd, image }) => {
         </div>
 
         <div className="mt-8 flex items-center justify-center">
-          <a
-            href=""
+          <Link
+            to="/shop"
             className="bg-lime-400 text-lime-700 px-4 py-2 rounded-full font-medium uppercase"
           >
             Shop Now
-          </a>
+          </Link>
         </div>
       </div>
       <div></div>

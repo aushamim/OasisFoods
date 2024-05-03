@@ -3,6 +3,7 @@ import "swiper/css";
 
 import { Autoplay } from "swiper/modules";
 import { useRef } from "react";
+import { Link } from "react-router-dom";
 
 const HeroSection = () => {
   const progressCircle = useRef(null);
@@ -32,21 +33,22 @@ const HeroSection = () => {
               <h1 className="text-8xl font-bold my-5 -ml-2">Oranges</h1>
               <h3 className="text-xl mb-16">
                 <span className="text-3xl font-semibold text-orange-600">
-                  $14.00
+                  $11.20
                 </span>{" "}
                 / Package
               </h3>
-              <a
-                href=""
+              <Link
+                to="/shop"
                 className="bg-orange-400 px-5 py-3 rounded-full text-white font-medium uppercase"
               >
                 Shop Now
-              </a>
+              </Link>
             </div>
           </SwiperSlide>
 
           <SwiperSlide>
             <div className="pt-24 pb-52 px-20 bg-[url(/assets/images/hero-2.png)] bg-no-repeat bg-cover">
+              {/* Dummy Text */}
               <div className="invisible">
                 <p className="font-semibold text-orange-500 uppercase">
                   Fresh Fruit
@@ -75,22 +77,24 @@ const HeroSection = () => {
               </p>
               <h1 className="text-8xl font-bold my-5 -ml-2">Summer Fruits</h1>
               <h3 className="text-xl mb-16">
+                Up to{" "}
                 <span className="text-3xl font-semibold text-orange-600">
-                  20% Off
+                  40% Off
                 </span>{" "}
                 / Package
               </h3>
-              <a
-                href=""
+              <Link
+                to="/shop"
                 className="bg-orange-400 px-5 py-3 rounded-full text-white font-medium uppercase"
               >
                 Shop Now
-              </a>
+              </Link>
             </div>
           </SwiperSlide>
 
           <SwiperSlide>
             <div className="pt-24 pb-52 px-20 bg-[url(/assets/images/hero-4.png)] bg-no-repeat bg-cover">
+              {/* Dummy Text */}
               <div className="invisible">
                 <p className="font-semibold text-orange-500 uppercase">
                   Fresh Fruit
