@@ -57,24 +57,24 @@ const Navbar = () => {
         >
           Home
         </Link>
-        <a
-          href=""
+        <Link
+          to="/shop"
           className="ml-5 text-gray-500 hover:text-orange-500 duration-300"
         >
           Shop
-        </a>
+        </Link>
         <Link
           to="/blog"
           className="ml-5 text-gray-500 hover:text-orange-500 duration-300"
         >
           Blog
         </Link>
-        <a
-          href=""
+        <Link
+          to="/about-us"
           className="ml-5 text-gray-500 hover:text-orange-500 duration-300"
         >
           About Us
-        </a>
+        </Link>
       </div>
       <div className="flex items-center justify-end">
         <div className="flex items-center gap-1">

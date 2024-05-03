@@ -16,6 +16,7 @@ import BlogPage from "./Pages/Blog/BlogPage";
 import FourOFour from "./Components/FourOFour/FourOFour";
 import BlogDetailsPage from "./Pages/Blog/BlogDetailsPage";
 import NewBlog from "./Pages/Blog/NewBlog";
+import ComingSoon from "./Pages/ComingSoon/ComingSoon";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
         element: <Register />,
       },
       {
+        path: "/shop",
+        element: <ComingSoon />,
+      },
+      {
         path: "/blog",
         element: <BlogPage />,
       },
@@ -49,6 +54,10 @@ const router = createBrowserRouter([
       {
         path: "/blog/create",
         element: <NewBlog />,
+      },
+      {
+        path: "/about-us",
+        element: <ComingSoon />,
       },
     ],
   },
