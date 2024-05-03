@@ -5,8 +5,8 @@ import { toast } from "sonner";
 export const GlobalContext = createContext(null);
 
 const GlobalStateProvider = ({ children }) => {
-  // const APIHost = "https://oasisfoods.onrender.com";
-  const APIHost = "http://127.0.0.1:8000";
+  const APIHost = "https://oasisfoods.onrender.com";
+  // const APIHost = "http://127.0.0.1:8000";
 
   const [user, setUser] = useState(localStorage.getItem("user_id") || null);
   const [allProducts, setAllProducts] = useState([]);
