@@ -6,7 +6,6 @@ from products.views import (
     AllProductViewset,
     BestSellerProductViewset,
     CartViewset,
-    CategoryViewset,
     FeaturedProductViewset,
     SaleViewset,
 )
@@ -18,7 +17,6 @@ router.register(
     "best_seller", BestSellerProductViewset, basename="best-seller-products"
 )
 router.register("all-categories", AllCategoryViewset, basename="all-categories")
-# router.register("category", CategoryViewset, basename="category-details")
 router.register("sale", SaleViewset, basename="sale")
 router.register("cart", CartViewset, basename="cart")
 

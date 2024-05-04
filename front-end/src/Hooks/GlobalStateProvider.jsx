@@ -5,8 +5,8 @@ import { toast } from "sonner";
 export const GlobalContext = createContext(null);
 
 const GlobalStateProvider = ({ children }) => {
-  // const APIHost = "https://oasisfoods.onrender.com";
-  const APIHost = "http://127.0.0.1:8000";
+  const APIHost = "https://oasisfoods.onrender.com";
+  // const APIHost = "http://127.0.0.1:8000";
 
   const [user, setUser] = useState(
     parseInt(localStorage.getItem("user_id")) || null
@@ -18,6 +18,8 @@ const GlobalStateProvider = ({ children }) => {
   const [productQuickView, setProductQuickView] = useState({});
   const [blogs, setBlogs] = useState([]);
   const [sale, setSale] = useState([]);
+  const [cart, setCart] = useState([]);
+  const [cartTotalPrice, setCartTotalPrice] = useState(0);
 
   const [allProductsLoading, setAllProductsLoading] = useState(true);
   const [featuredProductsLoading, setFeaturedProductsLoading] = useState(true);
@@ -26,16 +28,67 @@ const GlobalStateProvider = ({ children }) => {
   const [blogsLoading, setBlogsLoading] = useState(true);
   const [saleLoading, setSaleLoading] = useState(true);
 
+  const [cartRefreshTrigger, setCartRefreshTrigger] = useState(false);
   const [refreshTrigger, setRefreshTrigger] = useState(false);
   const refresh = () => {
     setRefreshTrigger(refreshTrigger ? false : true);
   };
 
-  const addToCart = (product) => {
-    toast.info(`Coming Soon! Product ID: ${product?.id}`);
-  };
   const addToWishlist = (product) => {
     toast.info(`Coming Soon! Product ID: ${product?.id}`);
+  };
+
+  const addToCart = (product, quantity = 0) => {
+    if (!user) {
+      toast.error("Please login to use cart.");
+      return;
+    }
+
+    fetch(`${APIHost}/products/cart/?user_id=${user}&product_id=${product?.id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.length > 0) {
+          fetch(
+            `${APIHost}/products/cart/?user_id=${user}&product_id=${
+              product?.id
+            }&quantity=${quantity == 0 ? data[0].quantity + 1 : quantity}`,
+            {
+              method: "POST",
+            }
+          );
+          setCartRefreshTrigger(cartRefreshTrigger ? false : true);
+          toast.success("Product Updated");
+        } else {
+          const promise = () => {
+            return fetch(
+              `${APIHost}/products/cart/?user_id=${user}&product_id=${product?.id}&add_to_cart=True`,
+              {
+                method: "POST",
+              }
+            )
+              .then((res) => res.json())
+              .then((data) => {
+                if (data.error) {
+                  throw new Error(data.error);
+                } else {
+                  setCartRefreshTrigger(cartRefreshTrigger ? false : true);
+                  return data;
+                }
+              })
+              .catch((error) => {
+                throw error;
+              });
+          };
+
+          toast.promise(promise, {
+            loading: `Addng ${product?.name} to cart`,
+            success: `${product?.name} added to cart`,
+            error: (error) => {
+              return error;
+            },
+          });
+        }
+      });
   };
 
   useEffect(() => {
@@ -97,6 +150,27 @@ const GlobalStateProvider = ({ children }) => {
       });
   }, []);
 
+  useEffect(() => {
+    if (user) {
+      fetch(`${APIHost}/products/cart/?user_id=${user}`)
+        .then((res) => res.json())
+        .then((data) => {
+          setCart(data);
+
+          let price = 0;
+          for (const index in data) {
+            const productPrice =
+              parseFloat(data[index]?.product?.price) -
+              (parseFloat(data[index]?.product?.price) *
+                parseFloat(data[index]?.product?.discount)) /
+                100;
+            price += productPrice * data[index]?.quantity;
+          }
+          setCartTotalPrice(parseFloat(price).toFixed(2));
+        });
+    }
+  }, [user, cartRefreshTrigger]);
+
   return (
     <GlobalContext.Provider
       value={{
@@ -120,6 +194,8 @@ const GlobalStateProvider = ({ children }) => {
         addToWishlist,
         sale,
         saleLoading,
+        cart,
+        cartTotalPrice,
       }}
     >
       {children}

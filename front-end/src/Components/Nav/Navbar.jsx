@@ -42,7 +42,7 @@ const handleLogout = (token, APIHost, setUser) => {
 
 const Navbar = () => {
   const token = localStorage.getItem("token");
-  const { APIHost, user, setUser } = useGlobalState();
+  const { APIHost, user, setUser, cartTotalPrice } = useGlobalState();
   return (
     <div className="grid grid-cols-5 py-5 mb-5">
       <div className="text-3xl font-bold flex items-center">
@@ -184,7 +184,9 @@ const Navbar = () => {
                 <path d="M6 5l14 1l-1 7h-13" />
               </svg>
             </div>
-            <p className="ml-3 font-semibold text-lime-700">$0.00</p>
+            <p className="ml-3 font-semibold text-lime-700">
+              ${cartTotalPrice}
+            </p>
           </a>
         </div>
       </div>
