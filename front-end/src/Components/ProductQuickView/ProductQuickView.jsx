@@ -15,9 +15,9 @@ const ProductQuickView = () => {
           </div>
           <div className="">
             <p
-              className={`uppercase text-sm font-medium text-${productQuickView?.category_color}-500`}
+              className={`uppercase text-sm font-medium text-${productQuickView?.category?.color_category}-500`}
             >
-              {productQuickView?.category_name}
+              {productQuickView?.category?.name}
             </p>
             <p className="mt-2 font-semibold text-3xl">
               {productQuickView?.name}

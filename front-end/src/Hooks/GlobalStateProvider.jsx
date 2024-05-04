@@ -8,7 +8,9 @@ const GlobalStateProvider = ({ children }) => {
   // const APIHost = "https://oasisfoods.onrender.com";
   const APIHost = "http://127.0.0.1:8000";
 
-  const [user, setUser] = useState(localStorage.getItem("user_id") || null);
+  const [user, setUser] = useState(
+    parseInt(localStorage.getItem("user_id")) || null
+  );
   const [allProducts, setAllProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [featuredProducts, setFeaturedProducts] = useState([]);

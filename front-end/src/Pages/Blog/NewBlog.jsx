@@ -10,7 +10,7 @@ const handleSubmit = (e, user, APIHost, navigate, refresh) => {
   const image = e.target.elements["image"].files[0];
 
   const formData = new FormData();
-  formData.append("user", parseInt(user));
+  formData.append("user", user);
   formData.append("title", title);
   formData.append("body", body);
   formData.append("image", image);

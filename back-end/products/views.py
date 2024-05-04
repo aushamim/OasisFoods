@@ -2,8 +2,13 @@ from django.shortcuts import render
 from rest_framework import viewsets, generics
 from rest_framework.response import Response
 
-from products.models import Category, Product, Sale
-from products.serializers import CategorySerializer, ProductSerializer, SaleSerializer
+from products.models import Cart, Category, Product, Sale
+from products.serializers import (
+    CartSerializer,
+    CategorySerializer,
+    ProductSerializer,
+    SaleSerializer,
+)
 
 
 # Create your views here.
@@ -49,3 +54,8 @@ class CategoryViewset(viewsets.ModelViewSet):
 class SaleViewset(viewsets.ModelViewSet):
     queryset = Sale.objects.all()
     serializer_class = SaleSerializer
+
+
+class CartViewset(viewsets.ModelViewSet):
+    queryset = Cart.objects.all()
+    serializer_class = CartSerializer

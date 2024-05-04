@@ -5,6 +5,7 @@ from products.views import (
     AllCategoryViewset,
     AllProductViewset,
     BestSellerProductViewset,
+    CartViewset,
     CategoryViewset,
     FeaturedProductViewset,
     SaleViewset,
@@ -19,6 +20,7 @@ router.register(
 router.register("all-categories", AllCategoryViewset, basename="all-categories")
 router.register("category", CategoryViewset, basename="category-details")
 router.register("sale", SaleViewset, basename="sale")
+router.register("cart", CartViewset, basename="cart")
 
 urlpatterns = [
     path("", include(router.urls)),

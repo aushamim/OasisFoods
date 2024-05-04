@@ -16,7 +16,7 @@ const handleSubmit = (e, user, blog, APIHost, refresh) => {
 
   const data = {
     blog: blog,
-    user: parseInt(user),
+    user: user,
     body: comment,
   };
 

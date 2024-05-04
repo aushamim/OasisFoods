@@ -1,16 +1,8 @@
-import { useEffect, useState } from "react";
 import useGlobalState from "../../Hooks/useGlobalState";
 
 /* eslint-disable react/prop-types */
 const Product = ({ product }) => {
-  const { APIHost, setProductQuickView, addToCart, addToWishlist } =
-    useGlobalState();
-  const [categoryDetails, setCategoryDetails] = useState([]);
-  useEffect(() => {
-    fetch(`${APIHost}/products/category/?id=${product?.category}`)
-      .then((res) => res.json())
-      .then((data) => setCategoryDetails(data[0]));
-  }, [product?.category, APIHost]);
+  const { setProductQuickView, addToCart, addToWishlist } = useGlobalState();
 
   return (
     <div className="border border-gray-100 py-8 rounded hover:border-gray-50 hover:shadow-xl transition duration-300 relative">
@@ -35,9 +27,9 @@ const Product = ({ product }) => {
       )}
       <img className="h-40 mx-auto" src={product?.image} alt="" />
       <p
-        className={`uppercase mt-6 text-sm font-medium text-center text-${categoryDetails?.color_category}-500`}
+        className={`uppercase mt-6 text-sm font-medium text-center text-${product?.category?.color_category}-500`}
       >
-        {categoryDetails?.name}
+        {product?.category?.name}
       </p>
       <p className="mt-2 font-semibold text-center text-lg">{product?.name}</p>
       <p className="mt-2 font-semibold text-center">
@@ -109,11 +101,7 @@ const Product = ({ product }) => {
           <button
             className="bg-slate-200 hover:bg-slate-300 p-2 rounded-full"
             onClick={() => {
-              setProductQuickView({
-                ...product,
-                category_name: categoryDetails?.name,
-                category_color: categoryDetails?.color_category,
-              });
+              setProductQuickView(product);
               document.getElementById("product-quick-view").showModal();
             }}
           >
