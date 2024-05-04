@@ -5,22 +5,24 @@ import { toast } from "sonner";
 export const GlobalContext = createContext(null);
 
 const GlobalStateProvider = ({ children }) => {
-  const APIHost = "https://oasisfoods.onrender.com";
-  // const APIHost = "http://127.0.0.1:8000";
+  // const APIHost = "https://oasisfoods.onrender.com";
+  const APIHost = "http://127.0.0.1:8000";
 
   const [user, setUser] = useState(localStorage.getItem("user_id") || null);
   const [allProducts, setAllProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [featuredProducts, setFeaturedProducts] = useState([]);
   const [bestSellerProducts, setBestSellerProducts] = useState([]);
+  const [productQuickView, setProductQuickView] = useState({});
   const [blogs, setBlogs] = useState([]);
+  const [sale, setSale] = useState([]);
 
   const [allProductsLoading, setAllProductsLoading] = useState(true);
   const [featuredProductsLoading, setFeaturedProductsLoading] = useState(true);
   const [bestSellerProductsLoading, setBestSellerProductsLoading] =
     useState(true);
   const [blogsLoading, setBlogsLoading] = useState(true);
-  const [productQuickView, setProductQuickView] = useState({});
+  const [saleLoading, setSaleLoading] = useState(true);
 
   const [refreshTrigger, setRefreshTrigger] = useState(false);
   const refresh = () => {
@@ -83,6 +85,16 @@ const GlobalStateProvider = ({ children }) => {
       });
   }, [refreshTrigger]);
 
+  useEffect(() => {
+    setSaleLoading(true);
+    fetch(`${APIHost}/products/sale/`)
+      .then((res) => res.json())
+      .then((data) => {
+        setSale(data);
+        setSaleLoading(false);
+      });
+  }, []);
+
   return (
     <GlobalContext.Provider
       value={{
@@ -104,6 +116,8 @@ const GlobalStateProvider = ({ children }) => {
         setProductQuickView,
         addToCart,
         addToWishlist,
+        sale,
+        saleLoading,
       }}
     >
       {children}

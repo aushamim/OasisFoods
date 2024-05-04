@@ -6,8 +6,11 @@ import Partners from "../../Components/Partners/Partners";
 import Blogs from "../../Components/Blogs/Blogs";
 import { Link } from "react-router-dom";
 import ProductQuickView from "../../Components/ProductQuickView/ProductQuickView";
+import useGlobalState from "../../Hooks/useGlobalState";
+import Loader from "../../Components/Loader/Loader";
 
 const HomePage = () => {
+  const { sale, saleLoading, APIHost } = useGlobalState();
   return (
     <div>
       <HeroSection></HeroSection>
@@ -62,11 +65,21 @@ const HomePage = () => {
       </div>
 
       <BestSeller></BestSeller>
-      <Sale
-        saleName={"Summer"}
-        saleEnd={"2024-05-10T00:00:00"}
-        image={"https://i.ibb.co/StzdWS5/sale-default.png"}
-      ></Sale>
+      {saleLoading ? (
+        <Loader />
+      ) : (
+        <>
+          {sale?.map((s) => (
+            <Sale
+              key={s.id}
+              saleName={s.name}
+              description={s.description}
+              saleEnd={s.time_until}
+              image={s.image ? s.image : APIHost + "/media/sales/default.png"}
+            ></Sale>
+          ))}
+        </>
+      )}
       <Blogs></Blogs>
       <Partners></Partners>
       <ProductQuickView></ProductQuickView>

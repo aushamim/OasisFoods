@@ -2,8 +2,8 @@ from django.shortcuts import render
 from rest_framework import viewsets, generics
 from rest_framework.response import Response
 
-from products.models import Category, Product
-from products.serializers import CategorySerializer, ProductSerializer
+from products.models import Category, Product, Sale
+from products.serializers import CategorySerializer, ProductSerializer, SaleSerializer
 
 
 # Create your views here.
@@ -44,3 +44,8 @@ class CategoryViewset(viewsets.ModelViewSet):
                 },
                 status=400,
             )
+
+
+class SaleViewset(viewsets.ModelViewSet):
+    queryset = Sale.objects.all()
+    serializer_class = SaleSerializer

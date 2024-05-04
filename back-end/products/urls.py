@@ -7,6 +7,7 @@ from products.views import (
     BestSellerProductViewset,
     CategoryViewset,
     FeaturedProductViewset,
+    SaleViewset,
 )
 
 router = DefaultRouter()
@@ -17,6 +18,7 @@ router.register(
 )
 router.register("all-categories", AllCategoryViewset, basename="all-categories")
 router.register("category", CategoryViewset, basename="category-details")
+router.register("sale", SaleViewset, basename="sale")
 
 urlpatterns = [
     path("", include(router.urls)),

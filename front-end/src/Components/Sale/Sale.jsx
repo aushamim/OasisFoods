@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-const Sale = ({ saleName, saleEnd, image }) => {
+const Sale = ({ saleName, description, saleEnd, image }) => {
   const [timeRemaining, setTimeRemaining] = useState(calculateTimeRemaining());
 
   useEffect(() => {
@@ -46,13 +46,9 @@ const Sale = ({ saleName, saleEnd, image }) => {
     >
       <div>
         <h1 className="text-5xl font-semibold text-center">
-          <span className="capitalize">{saleName}</span> Sale
+          <span className="capitalize">{saleName}</span>
         </h1>
-        <p className="text-center mt-2">
-          Grab fresh fruits from our{" "}
-          <span className="lowercase">{saleName}</span> collection while
-          available
-        </p>
+        <p className="text-center mt-2">{description}</p>
 
         <div className="mt-7">
           <div className="w-2/3 mx-auto grid grid-cols-4 gap-5">
