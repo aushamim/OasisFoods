@@ -18,6 +18,7 @@ import BlogDetailsPage from "./Pages/Blog/BlogDetailsPage";
 import NewBlog from "./Pages/Blog/NewBlog";
 import ComingSoon from "./Pages/ComingSoon/ComingSoon";
 import Shop from "./Pages/Shop/Shop";
+import Cart from "./Pages/Cart/Cart";
 
 const router = createBrowserRouter([
   {
@@ -55,6 +56,18 @@ const router = createBrowserRouter([
       {
         path: "/blog/create",
         element: <NewBlog />,
+      },
+      {
+        path: "/cart",
+        element: <Cart />,
+      },
+      {
+        path: "/cart/checkout",
+        element: <ComingSoon />,
+      },
+      {
+        path: "/cart/order-complete",
+        element: <ComingSoon />,
       },
       {
         path: "/about-us",

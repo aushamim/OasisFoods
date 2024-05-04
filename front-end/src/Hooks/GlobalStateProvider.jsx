@@ -5,8 +5,8 @@ import { toast } from "sonner";
 export const GlobalContext = createContext(null);
 
 const GlobalStateProvider = ({ children }) => {
-  const APIHost = "https://oasisfoods.onrender.com";
-  // const APIHost = "http://127.0.0.1:8000";
+  // const APIHost = "https://oasisfoods.onrender.com";
+  const APIHost = "http://127.0.0.1:8000";
 
   const [user, setUser] = useState(
     parseInt(localStorage.getItem("user_id")) || null
@@ -27,6 +27,7 @@ const GlobalStateProvider = ({ children }) => {
     useState(true);
   const [blogsLoading, setBlogsLoading] = useState(true);
   const [saleLoading, setSaleLoading] = useState(true);
+  const [cartLoading, setCartLoading] = useState(true);
 
   const [cartRefreshTrigger, setCartRefreshTrigger] = useState(false);
   const [refreshTrigger, setRefreshTrigger] = useState(false);
@@ -152,10 +153,12 @@ const GlobalStateProvider = ({ children }) => {
 
   useEffect(() => {
     if (user) {
+      setCartLoading(true);
       fetch(`${APIHost}/products/cart/?user_id=${user}`)
         .then((res) => res.json())
         .then((data) => {
           setCart(data);
+          setCartLoading(false);
 
           let price = 0;
           for (const index in data) {
@@ -195,6 +198,7 @@ const GlobalStateProvider = ({ children }) => {
         sale,
         saleLoading,
         cart,
+        cartLoading,
         cartTotalPrice,
       }}
     >

@@ -160,9 +160,9 @@ const Navbar = () => {
             </div>
           )}
 
-          <a
+          <Link
+            to="/cart"
             className="flex items-center bg-lime-100 hover:bg-lime-200 duration-500 p-1 pr-4 rounded-full"
-            href=""
           >
             <div className="bg-lime-300 p-2 rounded-full">
               <svg
@@ -187,7 +187,7 @@ const Navbar = () => {
             <p className="ml-3 font-semibold text-lime-700">
               ${cartTotalPrice}
             </p>
-          </a>
+          </Link>
         </div>
       </div>
     </div>
