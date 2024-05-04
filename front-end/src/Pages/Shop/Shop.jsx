@@ -14,7 +14,7 @@ const Shop = () => {
       setFilteredProducts(allProducts);
     } else {
       setFilteredProducts(
-        allProducts?.filter((product) => product.category == active)
+        allProducts?.filter((product) => product.category.id == active)
       );
     }
   }, [active, allProducts]);

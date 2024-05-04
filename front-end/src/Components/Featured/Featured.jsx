@@ -14,7 +14,7 @@ const Featured = () => {
       setFilteredProducts(featuredProducts);
     } else {
       setFilteredProducts(
-        featuredProducts?.filter((product) => product.category == active)
+        featuredProducts?.filter((product) => product.category.id == active)
       );
     }
   }, [active, featuredProducts]);

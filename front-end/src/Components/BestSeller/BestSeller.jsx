@@ -14,7 +14,7 @@ const BestSeller = () => {
       setFilteredProducts(bestSellerProducts);
     } else {
       setFilteredProducts(
-        bestSellerProducts?.filter((product) => product.category == active)
+        bestSellerProducts?.filter((product) => product.category.id == active)
       );
     }
   }, [active, bestSellerProducts]);
