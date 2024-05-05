@@ -104,7 +104,7 @@ const Navbar = () => {
               </div>
               <ul
                 tabIndex={0}
-                className="dropdown-content z-10 menu p-2 shadow rounded-lg bg-base-100 border w-36 font-medium"
+                className="dropdown-content z-[999] menu p-2 shadow rounded-lg bg-base-100 border w-36 font-medium"
               >
                 <li>
                   <Link to="/wishlist">Wishlist</Link>
