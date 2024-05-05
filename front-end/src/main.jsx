@@ -21,6 +21,7 @@ import Shop from "./Pages/Shop/Shop";
 import Cart from "./Pages/Cart/Cart";
 import Checkout from "./Pages/Cart/Checkout";
 import OrderComplete from "./Pages/Cart/OrderComplete";
+import AboutUs from "./Pages/AboutUs/AboutUs";
 
 const router = createBrowserRouter([
   {
@@ -72,8 +73,16 @@ const router = createBrowserRouter([
         element: <OrderComplete />,
       },
       {
-        path: "/about-us",
+        path: "/wishlist",
         element: <ComingSoon />,
+      },
+      {
+        path: "/my-orders",
+        element: <ComingSoon />,
+      },
+      {
+        path: "/about-us",
+        element: <AboutUs />,
       },
     ],
   },

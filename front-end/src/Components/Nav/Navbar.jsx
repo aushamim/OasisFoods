@@ -79,7 +79,7 @@ const Navbar = () => {
       <div className="flex items-center justify-end">
         <div className="flex items-center gap-1">
           {user ? (
-            <div className="dropdown dropdown-end">
+            <div className="dropdown dropdown-end dropdown-hover">
               <div
                 tabIndex={0}
                 role="button"
@@ -107,13 +107,10 @@ const Navbar = () => {
                 className="dropdown-content z-10 menu p-2 shadow rounded-lg bg-base-100 border w-36 font-medium"
               >
                 <li>
-                  <button
-                    onClick={() => {
-                      toast.info("Coming Soon");
-                    }}
-                  >
-                    Wishlist
-                  </button>
+                  <Link to="/wishlist">Wishlist</Link>
+                </li>
+                <li>
+                  <Link to="/my-orders">My Orders</Link>
                 </li>
                 <li>
                   <button
