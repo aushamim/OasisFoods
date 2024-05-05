@@ -65,9 +65,10 @@ class CartViewset(viewsets.ModelViewSet):
         product_id = self.request.query_params.get("product_id")
         quantity = self.request.query_params.get("quantity")
         add_to_cart = self.request.query_params.get("add_to_cart")
+        remove_item = self.request.query_params.get("remove_item")
+        complete_order = self.request.query_params.get("complete_order")
 
         if quantity is not None:
-            print("\n\naaaaaaaaaaaaaaaaaaaaaaa\n\n")
             if user_id is not None and product_id is not None:
                 queryset = self.get_queryset().filter(
                     user=user_id, product__id=product_id
@@ -88,7 +89,7 @@ class CartViewset(viewsets.ModelViewSet):
                     status=status.HTTP_400_BAD_REQUEST,
                 )
 
-        if add_to_cart == "True":
+        if add_to_cart is not None and add_to_cart == "True":
             if user_id is not None and product_id is not None:
                 product = Product.objects.get(id=product_id)
                 user = User.objects.get(id=user_id)
@@ -109,6 +110,42 @@ class CartViewset(viewsets.ModelViewSet):
                 return Response(
                     {
                         "message": "Both 'user_id' and 'product_id' are required when 'add_to_cart' is 'True'."
+                    },
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
+
+        if remove_item is not None and remove_item == "True":
+            if user_id is not None and product_id is not None:
+                queryset = self.get_queryset().filter(
+                    user=user_id, product__id=product_id
+                )
+                if queryset.exists():
+                    queryset.delete()
+                return Response(
+                    {"message": "Cart item removed successfully."},
+                    status=status.HTTP_201_CREATED,
+                )
+            else:
+                return Response(
+                    {
+                        "message": "Both 'user_id' and 'product_id' are required when 'remove_item' is 'True'."
+                    },
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
+
+        if complete_order is not None:
+            if user_id is not None:
+                queryset = self.get_queryset().filter(user=user_id)
+                if queryset.exists():
+                    queryset.delete()
+                return Response(
+                    {"message": "Order Placed successfully."},
+                    status=status.HTTP_201_CREATED,
+                )
+            else:
+                return Response(
+                    {
+                        "message": "'user_id' is required when 'complete_order' is 'True'."
                     },
                     status=status.HTTP_400_BAD_REQUEST,
                 )

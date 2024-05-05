@@ -19,6 +19,8 @@ import NewBlog from "./Pages/Blog/NewBlog";
 import ComingSoon from "./Pages/ComingSoon/ComingSoon";
 import Shop from "./Pages/Shop/Shop";
 import Cart from "./Pages/Cart/Cart";
+import Checkout from "./Pages/Cart/Checkout";
+import OrderComplete from "./Pages/Cart/OrderComplete";
 
 const router = createBrowserRouter([
   {
@@ -63,11 +65,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/cart/checkout",
-        element: <ComingSoon />,
+        element: <Checkout />,
       },
       {
         path: "/cart/order-complete",
-        element: <ComingSoon />,
+        element: <OrderComplete />,
       },
       {
         path: "/about-us",

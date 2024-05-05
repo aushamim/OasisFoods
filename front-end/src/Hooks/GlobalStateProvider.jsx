@@ -30,6 +30,9 @@ const GlobalStateProvider = ({ children }) => {
   const [cartLoading, setCartLoading] = useState(true);
 
   const [cartRefreshTrigger, setCartRefreshTrigger] = useState(false);
+  const cartRefresh = () => {
+    setCartRefreshTrigger(cartRefreshTrigger ? false : true);
+  };
   const [refreshTrigger, setRefreshTrigger] = useState(false);
   const refresh = () => {
     setRefreshTrigger(refreshTrigger ? false : true);
@@ -57,7 +60,7 @@ const GlobalStateProvider = ({ children }) => {
               method: "POST",
             }
           );
-          setCartRefreshTrigger(cartRefreshTrigger ? false : true);
+          cartRefresh();
           toast.success("Product Updated");
         } else {
           const promise = () => {
@@ -72,7 +75,7 @@ const GlobalStateProvider = ({ children }) => {
                 if (data.error) {
                   throw new Error(data.error);
                 } else {
-                  setCartRefreshTrigger(cartRefreshTrigger ? false : true);
+                  cartRefresh();
                   return data;
                 }
               })
@@ -97,7 +100,7 @@ const GlobalStateProvider = ({ children }) => {
     fetch(`${APIHost}/products/all/`)
       .then((res) => res.json())
       .then((data) => {
-        setAllProducts(data);
+        setAllProducts(data.reverse());
         setAllProductsLoading(false);
       });
   }, []);
@@ -113,7 +116,7 @@ const GlobalStateProvider = ({ children }) => {
     fetch(`${APIHost}/products/featured/`)
       .then((res) => res.json())
       .then((data) => {
-        setFeaturedProducts(data);
+        setFeaturedProducts(data.reverse());
         setFeaturedProductsLoading(false);
       });
   }, []);
@@ -123,7 +126,7 @@ const GlobalStateProvider = ({ children }) => {
     fetch(`${APIHost}/products/best_seller/`)
       .then((res) => res.json())
       .then((data) => {
-        setBestSellerProducts(data);
+        setBestSellerProducts(data.reverse());
         setBestSellerProductsLoading(false);
       });
   }, []);
@@ -200,6 +203,7 @@ const GlobalStateProvider = ({ children }) => {
         cart,
         cartLoading,
         cartTotalPrice,
+        cartRefresh,
       }}
     >
       {children}
