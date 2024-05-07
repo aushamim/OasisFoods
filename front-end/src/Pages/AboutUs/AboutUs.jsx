@@ -25,7 +25,7 @@ const AboutUs = () => {
         <div>
           <img
             className="w-full rounded-lg"
-            src="assets/images/about-us.png"
+            src="/assets/images/about-us.png"
             alt=""
           />
         </div>
@@ -33,21 +33,21 @@ const AboutUs = () => {
 
       <div className="mt-16 grid grid-cols-3 gap-10 items-center border rounded-lg p-5 py-10">
         <div className="flex items-center justify-center">
-          <img className="w-12 mr-8" src="assets/images/ic-1.png" alt="" />
+          <img className="w-12 mr-8" src="/assets/images/ic-1.png" alt="" />
           <div>
             <h1 className="text-4xl font-semibold">100%</h1>
             <p className="text-center">Happy Clients</p>
           </div>
         </div>
         <div className="flex items-center justify-center">
-          <img className="w-14 mr-8" src="assets/images/ic-2.png" alt="" />
+          <img className="w-14 mr-8" src="/assets/images/ic-2.png" alt="" />
           <div>
             <h1 className="text-4xl font-semibold">100</h1>
             <p className="text-center">Our Engineers</p>
           </div>
         </div>
         <div className="flex items-center justify-center">
-          <img className="w-12 mr-8" src="assets/images/ic-3.png" alt="" />
+          <img className="w-12 mr-8" src="/assets/images/ic-3.png" alt="" />
           <div>
             <h1 className="text-4xl font-semibold">10+</h1>
             <p className="text-center">Our Farms</p>
@@ -57,7 +57,7 @@ const AboutUs = () => {
 
       <div className="mt-16 px-20 grid grid-cols-3 gap-10 bg-[url(assets/images/why-us-bg.png)] bg-cover bg-no-repeat">
         <div className="pt-16">
-          <img className="w-full" src="assets/images/why-us-1.png" alt="" />
+          <img className="w-full" src="/assets/images/why-us-1.png" alt="" />
         </div>
         <div className="col-span-2 pt-20">
           <h1 className="text-3xl font-bold">Why choose us</h1>
@@ -67,7 +67,7 @@ const AboutUs = () => {
               <div className="bg-[#eaecf2] rounded-full p-3 aspect-square flex items-center justify-center">
                 <img
                   className="w-10"
-                  src="assets/images/why-us-ic-1.png"
+                  src="/assets/images/why-us-ic-1.png"
                   alt=""
                 />
               </div>
@@ -82,7 +82,7 @@ const AboutUs = () => {
               <div className="bg-[#eaecf2] rounded-full p-4 aspect-square flex items-center justify-center">
                 <img
                   className="w-8"
-                  src="assets/images/why-us-ic-2.png"
+                  src="/assets/images/why-us-ic-2.png"
                   alt=""
                 />
               </div>
@@ -97,7 +97,7 @@ const AboutUs = () => {
               <div className="bg-[#eaecf2] rounded-full p-3 aspect-square flex items-center justify-center">
                 <img
                   className="w-10"
-                  src="assets/images/why-us-ic-3.png"
+                  src="/assets/images/why-us-ic-3.png"
                   alt=""
                 />
               </div>
@@ -114,7 +114,7 @@ const AboutUs = () => {
               <div className="bg-[#eaecf2] rounded-full p-3 aspect-square flex items-center justify-center">
                 <img
                   className="w-10"
-                  src="assets/images/why-us-ic-4.png"
+                  src="/assets/images/why-us-ic-4.png"
                   alt=""
                 />
               </div>
