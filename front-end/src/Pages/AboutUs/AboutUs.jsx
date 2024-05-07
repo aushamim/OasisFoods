@@ -55,7 +55,7 @@ const AboutUs = () => {
         </div>
       </div>
 
-      <div className="mt-16 px-20 grid grid-cols-3 gap-10 bg-[url(/assets/images/why-us-bg.png)] bg-cover bg-no-repeat">
+      <div className="mt-16 px-20 grid grid-cols-3 gap-10 bg-[url(/assets/images/why-us-bg.png)] bg-cover bg-no-repeat rounded-lg">
         <div className="pt-16">
           <img className="w-full" src="/assets/images/why-us-1.png" alt="" />
         </div>
