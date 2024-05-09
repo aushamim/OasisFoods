@@ -19,7 +19,14 @@ const BlogComment = ({ comment }) => {
       <div className="">
         <div className="flex items-center">
           <p className="font-medium text-sm text-lime-600">
-            {comment?.user} | {comment?.likes?.length} Likes |
+            {comment?.user ? (
+              <>
+                {comment?.user?.first_name} {comment?.user?.last_name}
+              </>
+            ) : (
+              "[Deleted User]"
+            )}{" "}
+            | {comment?.likes?.length} Likes |
           </p>
           <button className="ml-2 text-xs uppercase font-medium bg-red-200 py-0.5 px-2 rounded-full text-red-600">
             Like

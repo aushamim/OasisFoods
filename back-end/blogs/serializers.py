@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
 from blogs.models import Blog, Comment
+from user_management.serializers import UserSerializer
 
 
 class BlogSerializer(serializers.ModelSerializer):
@@ -10,7 +11,7 @@ class BlogSerializer(serializers.ModelSerializer):
 
 
 class CommentSerializer(serializers.ModelSerializer):
-    user = serializers.StringRelatedField(many=False)
+    user = UserSerializer()
 
     class Meta:
         model = Comment

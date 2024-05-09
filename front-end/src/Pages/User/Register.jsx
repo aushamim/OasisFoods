@@ -43,7 +43,7 @@ const handleSubmit = (e, APIHost, navigate, setUser) => {
           localStorage.setItem("token", data.token);
           localStorage.setItem("user_id", data.user_id);
           setUser(localStorage.getItem("user_id") || null);
-          navigate(-1);
+          navigate("/", { replace: true });
         }
       })
       .catch((error) => {

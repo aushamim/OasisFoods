@@ -11,17 +11,19 @@ import Layout from "./Components/Layout/Layout";
 import HomePage from "./Pages/Home/HomePage";
 import Login from "./Pages/User/Login";
 import Register from "./Pages/User/Register";
+import Profile from "./Pages/User/Profile";
 import GlobalStateProvider from "./Hooks/GlobalStateProvider";
 import BlogPage from "./Pages/Blog/BlogPage";
 import FourOFour from "./Components/FourOFour/FourOFour";
 import BlogDetailsPage from "./Pages/Blog/BlogDetailsPage";
 import NewBlog from "./Pages/Blog/NewBlog";
-import ComingSoon from "./Pages/ComingSoon/ComingSoon";
 import Shop from "./Pages/Shop/Shop";
 import Cart from "./Pages/Cart/Cart";
 import Checkout from "./Pages/Cart/Checkout";
 import OrderComplete from "./Pages/Cart/OrderComplete";
 import AboutUs from "./Pages/AboutUs/AboutUs";
+import WishList from "./Pages/User/WishList";
+import OrderList from "./Pages/User/OrderList";
 
 const router = createBrowserRouter([
   {
@@ -43,6 +45,10 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register />,
+      },
+      {
+        path: "/profile",
+        element: <Profile />,
       },
       {
         path: "/shop",
@@ -74,11 +80,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/wishlist",
-        element: <ComingSoon />,
+        element: <WishList />,
       },
       {
         path: "/my-orders",
-        element: <ComingSoon />,
+        element: <OrderList />,
       },
       {
         path: "/about-us",

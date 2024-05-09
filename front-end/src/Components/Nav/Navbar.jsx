@@ -107,6 +107,9 @@ const Navbar = () => {
                 className="dropdown-content z-[999] menu p-2 shadow rounded-lg bg-base-100 border w-36 font-medium"
               >
                 <li>
+                  <Link to="/profile">Profile</Link>
+                </li>
+                <li>
                   <Link to="/wishlist">Wishlist</Link>
                 </li>
                 <li>
@@ -182,7 +185,7 @@ const Navbar = () => {
               </svg>
             </div>
             <p className="ml-3 font-semibold text-lime-700">
-              ${cartTotalPrice}
+              ${parseFloat(cartTotalPrice).toFixed(2)}
             </p>
           </Link>
         </div>

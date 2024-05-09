@@ -15,6 +15,15 @@ class ProfileViewset(viewsets.ModelViewSet):
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
 
+    def list(self, request):
+        user_id = request.query_params.get("user_id")
+        if user_id is not None:
+            queryset = self.queryset.filter(user__id=user_id)
+        else:
+            queryset = self.queryset
+        serializer = self.serializer_class(queryset, many=True)
+        return Response(serializer.data)
+
 
 class RegistrationViewset(APIView):
     serializer_class = RegistrationSerilizer

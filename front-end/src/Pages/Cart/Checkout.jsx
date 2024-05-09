@@ -34,7 +34,8 @@ const handlePlaceOrder = (APIHost, user, cartRefresh, navigate) => {
 };
 
 const Checkout = () => {
-  const { APIHost, user, cart, cartTotalPrice, cartRefresh } = useGlobalState();
+  const { APIHost, user, cart, cartTotalPrice, cartRefresh, userData } =
+    useGlobalState();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -56,21 +57,29 @@ const Checkout = () => {
               type="text"
               placeholder="Name"
               className="input input-bordered w-full mb-5"
+              defaultValue={
+                userData
+                  ? userData?.user?.first_name + " " + userData?.user?.last_name
+                  : ""
+              }
             />
             <input
               type="text"
               placeholder="Email"
               className="input input-bordered w-full mb-5"
+              defaultValue={userData ? userData?.user?.email : ""}
             />
             <input
               type="text"
               placeholder="Phone No."
               className="input input-bordered w-full mb-5"
+              defaultValue={userData ? userData?.phone_no : ""}
             />
             <input
               type="text"
               placeholder="Address"
               className="input input-bordered w-full mb-5"
+              defaultValue={userData ? userData?.address : ""}
             />
             <textarea
               className="textarea textarea-bordered w-full"

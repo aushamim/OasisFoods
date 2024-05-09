@@ -3,8 +3,14 @@ from django.contrib.auth.models import User
 from user_management.models import Profile
 
 
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ["id", "username", "first_name", "last_name", "email", "date_joined"]
+
+
 class ProfileSerializer(serializers.ModelSerializer):
-    user = serializers.StringRelatedField(many=False)
+    user = UserSerializer()
 
     class Meta:
         model = Profile

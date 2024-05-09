@@ -5,12 +5,13 @@ import { toast } from "sonner";
 export const GlobalContext = createContext(null);
 
 const GlobalStateProvider = ({ children }) => {
-  const APIHost = "https://oasisfoods.onrender.com";
-  // const APIHost = "http://127.0.0.1:8000";
+  // const APIHost = "https://oasisfoods.onrender.com";
+  const APIHost = "http://127.0.0.1:8000";
 
   const [user, setUser] = useState(
     parseInt(localStorage.getItem("user_id")) || null
   );
+  const [userData, setUserData] = useState({});
   const [allProducts, setAllProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [featuredProducts, setFeaturedProducts] = useState([]);
@@ -19,7 +20,7 @@ const GlobalStateProvider = ({ children }) => {
   const [blogs, setBlogs] = useState([]);
   const [sale, setSale] = useState([]);
   const [cart, setCart] = useState([]);
-  const [cartTotalPrice, setCartTotalPrice] = useState(0);
+  const [cartTotalPrice, setCartTotalPrice] = useState(0.0);
 
   const [allProductsLoading, setAllProductsLoading] = useState(true);
   const [featuredProductsLoading, setFeaturedProductsLoading] = useState(true);
@@ -94,6 +95,20 @@ const GlobalStateProvider = ({ children }) => {
         }
       });
   };
+
+  useEffect(() => {
+    if (user) {
+      fetch(`${APIHost}/user/list/?user_id=${user}`)
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.length > 0) {
+            setUserData(data[0]);
+          } else {
+            setUserData(null);
+          }
+        });
+    }
+  }, [APIHost, user]);
 
   useEffect(() => {
     setAllProductsLoading(true);
@@ -183,6 +198,7 @@ const GlobalStateProvider = ({ children }) => {
         APIHost,
         user,
         setUser,
+        userData,
         refreshTrigger,
         refresh,
         allProducts,

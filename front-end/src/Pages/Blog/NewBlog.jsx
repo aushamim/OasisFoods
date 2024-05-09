@@ -13,7 +13,9 @@ const handleSubmit = (e, user, APIHost, navigate, refresh) => {
   formData.append("user", user);
   formData.append("title", title);
   formData.append("body", body);
-  formData.append("image", image);
+  if (image) {
+    formData.append("image", image);
+  }
 
   const promise = () => {
     return fetch(`${APIHost}/blogs/all/`, {

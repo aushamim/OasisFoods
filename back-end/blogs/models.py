@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class Blog(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     title = models.CharField(max_length=300)
     body = models.TextField()
     image = models.ImageField(upload_to="blogs/", blank=True, null=True)
@@ -26,7 +26,7 @@ class Blog(models.Model):
 
 class Comment(models.Model):
     blog = models.ForeignKey(Blog, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     body = models.TextField()
     likes = models.ManyToManyField(User, blank=True, related_name="comment_likes")
     timestamp = models.DateTimeField(auto_now_add=True)
