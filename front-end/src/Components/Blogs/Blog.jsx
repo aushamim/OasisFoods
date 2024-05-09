@@ -14,7 +14,7 @@ const Blog = ({ id }) => {
   const { APIHost } = useGlobalState();
   const [blog, setBlog] = useState([]);
   useEffect(() => {
-    fetch(`${APIHost}/blogs/details/?id=${id}`)
+    fetch(`${APIHost}/blogs/details/?blog_id=${id}`)
       .then((res) => res.json())
       .then((data) => setBlog(data[0]));
   }, [id, APIHost]);

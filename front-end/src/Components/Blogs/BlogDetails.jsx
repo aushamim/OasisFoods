@@ -5,8 +5,33 @@ import { toast } from "sonner";
 import BlogComment from "./BlogComment";
 import { Link } from "react-router-dom";
 
-const handleLike = () => {
-  toast.info("Coming Soon");
+const handleLike = (user, blog_id, like, APIHost, refresh) => {
+  const promise = () => {
+    return fetch(
+      `${APIHost}/blogs/details/?blog_id=${blog_id}&user_id=${user}&like=${like.toLowerCase()}`,
+      { method: "POST" }
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.error) {
+          throw new Error(data.error);
+        } else {
+          refresh();
+          return data;
+        }
+      })
+      .catch((error) => {
+        throw error;
+      });
+  };
+
+  toast.promise(promise, {
+    loading: "Working. Please wait.",
+    success: `Post ${like == "like" ? "Liked" : "Unliked"}`,
+    error: (error) => {
+      return error;
+    },
+  });
 };
 
 const handleSubmit = (e, user, blog, APIHost, refresh) => {
@@ -55,7 +80,7 @@ const BlogDetails = ({ id }) => {
   const [comments, setComments] = useState([]);
 
   useEffect(() => {
-    fetch(`${APIHost}/blogs/details/?id=${id}`)
+    fetch(`${APIHost}/blogs/details/?blog_id=${id}`)
       .then((res) => res.json())
       .then((data) => setBlog(data[0]));
   }, [id, APIHost, refreshTrigger]);
@@ -98,13 +123,21 @@ const BlogDetails = ({ id }) => {
         </div>
         <button
           onClick={() => {
-            handleLike();
+            if (blog?.likes?.find((blog_like_user) => blog_like_user == user)) {
+              handleLike(user, blog?.id, "unlike", APIHost, refresh);
+            } else {
+              handleLike(user, blog?.id, "like", APIHost, refresh);
+            }
           }}
           className="flex items-center gap-3 bg-rose-200 px-4 py-2 rounded-full text-red-600 font-semibold uppercase"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            fill="none"
+            fill={
+              blog?.likes?.find((blog_like_user) => blog_like_user == user)
+                ? "currentColor"
+                : "none"
+            }
             viewBox="0 0 24 24"
             strokeWidth={2}
             stroke="currentColor"
